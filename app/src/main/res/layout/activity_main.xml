@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#228AED"
+    android:onClick="toAddItem"
     tools:context=".MainActivity">
 
     <ImageView
@@ -112,10 +113,10 @@
         android:layout_width="198dp"
         android:layout_height="33dp"
         android:background="@drawable/my_border"
-        android:letterSpacing="0.05"
         android:ems="10"
         android:fontFamily="@font/anton"
         android:inputType="text"
+        android:letterSpacing="0.05"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -147,8 +148,8 @@
         android:background="@drawable/my_border"
         android:ems="10"
         android:fontFamily="@font/anton"
-        android:letterSpacing="0.05"
         android:inputType="textPassword"
+        android:letterSpacing="0.05"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -158,7 +159,7 @@
         app:layout_constraintVertical_bias="0.619" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/login"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="112dp"
         android:layout_height="58dp"
