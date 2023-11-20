@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Wishlist</string>
     <string name="login"><u>LOG IN </u></string>
+    <string name="register"><u>REGISTER</u></string>
     <string name="yes"><u>YES</u></string>
     <string name="no"><u>NO</u></string>
 
