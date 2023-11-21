@@ -170,9 +170,9 @@
 
     <Button
         android:id="@+id/btnLogin"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="112dp"
-        android:layout_height="58dp"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="107dp"
+        android:layout_height="54dp"
         android:fontFamily="@font/anton"
         android:letterSpacing="0.044"
         android:text="@string/login"
@@ -204,9 +204,9 @@
 
     <Button
         android:id="@+id/btnRegister"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="293dp"
-        android:layout_height="79dp"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="228dp"
+        android:layout_height="72dp"
         android:fontFamily="@font/anton"
         android:letterSpacing="0.044"
         android:shadowColor="#000000"
@@ -219,10 +219,10 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="@+id/ivNotepad"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.901" />
+        app:layout_constraintVertical_bias="0.892" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -203,9 +203,9 @@
 
     <Button
         android:id="@+id/btnLogin"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="142dp"
-        android:layout_height="54dp"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="116dp"
+        android:layout_height="52dp"
         android:fontFamily="@font/anton"
         android:letterSpacing="0.044"
         android:text="@string/register"
@@ -213,10 +213,9 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.731" />
+        app:layout_constraintVertical_bias="0.739" />
 
     <TextView
         android:id="@+id/textView7"
@@ -232,13 +231,13 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.876" />
+        app:layout_constraintVertical_bias="0.865" />
 
     <Button
         android:id="@+id/btnRegister"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="293dp"
-        android:layout_height="79dp"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="210dp"
+        android:layout_height="74dp"
         android:fontFamily="@font/anton"
         android:letterSpacing="0.044"
         android:shadowColor="#000000"
@@ -251,10 +250,10 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintHorizontal_bias="0.472"
         app:layout_constraintStart_toStartOf="@+id/ivNotepad"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.94" />
+        app:layout_constraintVertical_bias="0.926" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -117,9 +117,9 @@
 
     <Button
         android:id="@+id/btnConfirm"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="115dp"
+        android:layout_height="61dp"
         android:fontFamily="@font/anton"
         android:shadowColor="#000000"
         android:shadowDx="4"
