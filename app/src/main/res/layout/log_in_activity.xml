@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#228AED"
-    tools:context=".MainActivity">
+    tools:context=".LoginPage">
 
     <ImageView
         android:id="@+id/imageView4"
@@ -202,11 +202,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.836" />
 
-    <Button
-        android:id="@+id/btnRegister"
+    <TextView
+        android:id="@+id/tvSignUp"
         style="@style/Widget.Material3.Button.TextButton"
-        android:layout_width="228dp"
-        android:layout_height="72dp"
+        android:layout_width="219dp"
+        android:layout_height="74dp"
+        android:clickable="true"
         android:fontFamily="@font/anton"
         android:letterSpacing="0.044"
         android:shadowColor="#000000"
@@ -219,10 +220,10 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="@+id/ivNotepad"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.892" />
+        app:layout_constraintVertical_bias="0.901" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

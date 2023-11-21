@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00BF63"
-    tools:context=".MainActivity">
+
+    tools:context=".RegisterPage">
+
 
     <ImageView
         android:id="@+id/imageView4"
@@ -204,8 +206,8 @@
     <Button
         android:id="@+id/btnLogin"
         style="@style/Widget.Material3.Button.TextButton"
-        android:layout_width="116dp"
-        android:layout_height="52dp"
+        android:layout_width="120dp"
+        android:layout_height="62dp"
         android:fontFamily="@font/anton"
         android:letterSpacing="0.044"
         android:text="@string/register"
@@ -213,9 +215,10 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.739" />
+        app:layout_constraintVertical_bias="0.73" />
 
     <TextView
         android:id="@+id/textView7"
@@ -233,11 +236,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.865" />
 
-    <Button
-        android:id="@+id/btnRegister"
-        style="@style/Widget.Material3.Button.TextButton"
-        android:layout_width="210dp"
-        android:layout_height="74dp"
+    <TextView
+        android:id="@+id/tvLogin"
+        android:layout_width="217dp"
+        android:layout_height="61dp"
+        android:clickable="true"
         android:fontFamily="@font/anton"
         android:letterSpacing="0.044"
         android:shadowColor="#000000"
@@ -250,10 +253,9 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.472"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="@+id/ivNotepad"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.926" />
-
+        app:layout_constraintVertical_bias="0.922" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
