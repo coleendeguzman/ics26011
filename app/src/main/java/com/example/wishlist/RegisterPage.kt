@@ -65,7 +65,7 @@ class RegisterPage : AppCompatActivity() {
 
                 else {
 
-                    Toast.makeText(this, "Nominated password does not meet the requirements.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Password needs 8 characters at least 1 symbol and a mix of upper and lower case letters .", Toast.LENGTH_LONG).show()
                 }
 
             }
