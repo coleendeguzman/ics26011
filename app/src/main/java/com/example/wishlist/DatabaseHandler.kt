@@ -1,4 +1,4 @@
-package com.example.machineproblem5
+package com.example.wishlist
 
 import android.content.ContentValues
 import android.content.Context

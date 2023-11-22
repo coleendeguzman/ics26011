@@ -1,20 +1,79 @@
 package com.example.wishlist
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
 class RegisterPage : AppCompatActivity() {
+
+    private lateinit var dbHandler: DatabaseHandler
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_page)
 
+        dbHandler = DatabaseHandler(this)
+
         val tvLogin = findViewById<TextView>(R.id.tvLogin)
+        val btnRegister = findViewById<Button>(R.id.btnRegister)
 
         tvLogin.setOnClickListener {
             val i = Intent(this, LoginPage::class.java)
             startActivity(i)
+        }
+
+        btnRegister.setOnClickListener {
+
+            fun isValidPassword(password: String): Boolean {
+                val passwordRegex = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{8,}$")
+                return passwordRegex.matches(password)
+            }
+
+            val etUsername = findViewById<EditText>(R.id.etUsername)
+            val etPassword = findViewById<EditText>(R.id.etPassword)
+
+            val username = etUsername.text.toString()
+            val password = etPassword.text.toString()
+
+            if (username.trim().isNotEmpty() && password.trim().isNotEmpty()) {
+
+                if (isValidPassword(password)) {
+
+                    val registrationSuccess = dbHandler.registerUser(username, password)
+
+                    if (registrationSuccess != -1L) {
+                        Toast.makeText(this, "Registration successful!", Toast.LENGTH_LONG).show()
+
+                        val i = Intent(this, LoginPage::class.java)
+                        i.putExtra("USERNAME", username)
+                        startActivity(i)
+                        
+                        etUsername.text.clear()
+                        etPassword.text.clear()
+                    }
+
+                    else {
+
+                        Toast.makeText(this, "Registration Failed. Please try again.", Toast.LENGTH_LONG).show()
+                    }
+
+                }
+
+                else {
+
+                    Toast.makeText(this, "Nominated password does not meet the requirements.", Toast.LENGTH_LONG).show()
+                }
+
+            }
+
+            else {
+
+                Toast.makeText(this, "No fields may be left blank", Toast.LENGTH_LONG).show()
+            }
         }
     }
 }

@@ -8,7 +8,7 @@
     tools:context=".HomePage">
 
     <TextView
-        android:id="@+id/tvUsername"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/anton"
@@ -24,10 +24,14 @@
         app:layout_constraintVertical_bias="0.092" />
 
     <TextView
-        android:id="@+id/etUsername"
-        android:layout_width="328dp"
-        android:layout_height="49dp"
+        android:id="@+id/tvUsername"
+        android:layout_width="325dp"
+        android:layout_height="40dp"
         android:background="@drawable/dashed_border"
+        android:fontFamily="@font/anton"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -54,6 +58,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.217" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="121dp"
+        android:layout_height="56dp"
+        android:fontFamily="@font/anton"
+        android:letterSpacing="0.044"
+        android:text="@string/logout"
+        android:textColor="#FF0025"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.943" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
