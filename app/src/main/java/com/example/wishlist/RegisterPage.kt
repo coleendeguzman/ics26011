@@ -35,6 +35,7 @@ class RegisterPage : AppCompatActivity() {
 
             val etUsername = findViewById<EditText>(R.id.etUsername)
             val etPassword = findViewById<EditText>(R.id.etPassword)
+            val etConfirmPassword = findViewById<EditText>(R.id.etConfirmPassword)
 
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()
@@ -43,39 +44,44 @@ class RegisterPage : AppCompatActivity() {
 
                 if (isValidPassword(password)) {
 
-                    val registrationSuccess = dbHandler.registerUser(username, password)
+                    if (etPassword.text.toString() == etConfirmPassword.text.toString()) {
 
-                    if (registrationSuccess != -1L) {
-                        Toast.makeText(this, "Registration successful!", Toast.LENGTH_LONG).show()
+                        val registrationSuccess = dbHandler.registerUser(username, password)
 
-                        val i = Intent(this, LoginPage::class.java)
-                        i.putExtra("USERNAME", username)
-                        startActivity(i)
-                        
-                        etUsername.text.clear()
-                        etPassword.text.clear()
+                        if (registrationSuccess != -1L) {
+                            Toast.makeText(this, "Registration successful!", Toast.LENGTH_LONG)
+                                .show()
+
+                            val i = Intent(this, LoginPage::class.java)
+                            i.putExtra("USERNAME", username)
+                            startActivity(i)
+
+                            etUsername.text.clear()
+                            etPassword.text.clear()
+                        }
+                    } else {
+                            Toast.makeText(
+                                this,
+                                "Passwords do not match. Please Try again.",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    } else {
+
+                        Toast.makeText(
+                            this,
+                            "Registration Failed. Please try again.",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
-
-                    else {
-
-                        Toast.makeText(this, "Registration Failed. Please try again.",
-                            Toast.LENGTH_LONG).show()
-                    }
-
                 }
+
 
                 else {
 
-                    Toast.makeText(this, "Password needs 8 characters at least, " +
-                            "one symbol, and a mix of upper and lower case letters.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Password needs 8 characters at least 1 symbol and a mix of upper and lower case letters .", Toast.LENGTH_LONG).show()
                 }
 
             }
-
-            else {
-
-                Toast.makeText(this, "No fields may be left blank", Toast.LENGTH_LONG).show()
-            }
         }
     }
-}
