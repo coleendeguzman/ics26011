@@ -58,14 +58,16 @@ class RegisterPage : AppCompatActivity() {
 
                     else {
 
-                        Toast.makeText(this, "Registration Failed. Please try again.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Registration Failed. Please try again.",
+                            Toast.LENGTH_LONG).show()
                     }
 
                 }
 
                 else {
 
-                    Toast.makeText(this, "Password needs 8 characters at least 1 symbol and a mix of upper and lower case letters .", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Password needs 8 characters at least, " +
+                            "one symbol, and a mix of upper and lower case letters.", Toast.LENGTH_LONG).show()
                 }
 
             }
