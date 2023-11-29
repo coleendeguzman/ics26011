@@ -14,27 +14,37 @@ data class User(
 )
 class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_NAME, null, DATABASE_VERSION) {
 
-    companion object {
-        private const val DATABASE_VERSION = 1
-        private const val DATABASE_NAME = "UserDatabase.db"
+        companion object {
+            private const val DATABASE_VERSION = 2
+            private const val DATABASE_NAME = "UserDatabase.db"
 
-        private const val TABLE_USERS = "users"
-        private const val KEY_USERNAME = "username"
-        private const val KEY_PASSWORD = "password"
-    }
+            private const val TABLE_USERS = "users"
+            private const val KEY_USERNAME = "username"
+            private const val KEY_PASSWORD = "password"
 
-    override fun onCreate(db: SQLiteDatabase?) {
-        val CREATE_USERS_TABLE = ("CREATE TABLE $TABLE_USERS (" +
-                "$KEY_USERNAME TEXT PRIMARY KEY," +
-                "$KEY_PASSWORD TEXT)")
+            private const val TABLE_WISHES = "wishes"
+            private const val KEY_WISH_ID = "id"
+            private const val KEY_WISH_NAME = "wishname"
+            private const val KEY_WISH_DESCRIPTION = "description"
+            private const val KEY_WISH_LINK = "link"
+            private const val KEY_WISH_IMAGE = "image"
+            private const val KEY_WISH_CATEGORY = "category"
+        }
 
-        db?.execSQL(CREATE_USERS_TABLE)
-    }
+        override fun onCreate(db: SQLiteDatabase?) {
+            val CREATE_USERS_TABLE = ("CREATE TABLE $TABLE_USERS (" +
+                    "$KEY_USERNAME TEXT PRIMARY KEY," +
+                    "$KEY_PASSWORD TEXT)")
 
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db!!.execSQL("DROP TABLE IF EXISTS $TABLE_USERS")
-        onCreate(db)
-    }
+            db?.execSQL(CREATE_USERS_TABLE)
+        }
+
+        override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+            val CREATE_WISHES_TABLE = ("CREATE TABLE $TABLE_WISHES (" + "$KEY_WISH_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "$KEY_WISH_NAME TEXT," + "$KEY_WISH_DESCRIPTION TEXT," + "$KEY_WISH_LINK TEXT," + "$KEY_WISH_IMAGE BLOB," + "$KEY_WISH_CATEGORY TEXT)")
+
+            db?.execSQL(CREATE_WISHES_TABLE)
+        }
     fun registerUser(username: String, password: String): Long {
         val db = this.writableDatabase
         val values = ContentValues().apply {
