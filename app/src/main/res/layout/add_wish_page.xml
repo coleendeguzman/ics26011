@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F369C3"
+    tools:context=".AddWishPage">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:layout_editor_absoluteX="-125dp"
+        tools:layout_editor_absoluteY="-298dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="146dp"
+            android:layout_height="137dp"
+            android:layout_gravity="center"
+            android:paddingBottom="10dp"
+
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+        <TextView
+            android:id="@+id/etWishName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/anton"
+            android:letterSpacing="0.044"
+            android:text="ITEM NAME"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintVertical_bias="0.266" />
+
+        <EditText
+            android:id="@+id/et_wish_name"
+            android:layout_width="336dp"
+            android:layout_height="38dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/my_border"
+            android:ems="10"
+            android:fontFamily="@font/anton"
+            android:inputType="text"
+            android:letterSpacing="0.05"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/anton"
+            android:letterSpacing="0.044"
+            android:text="ITEM LINK"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_wish_link"
+            android:layout_width="336dp"
+            android:layout_height="38dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/my_border"
+            android:ems="10"
+            android:fontFamily="@font/anton"
+            android:inputType="text"
+            android:letterSpacing="0.05"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvImageURL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/anton"
+            android:letterSpacing="0.044"
+            android:text="IMAGE URL"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_image_url"
+            android:layout_width="336dp"
+            android:layout_height="38dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/my_border"
+            android:ems="10"
+            android:fontFamily="@font/anton"
+            android:inputType="text"
+            android:letterSpacing="0.05"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/anton"
+            android:letterSpacing="0.044"
+            android:text="CATEGORY"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_school"
+                android:layout_marginRight= "4dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/anton"
+                android:letterSpacing="0.044"
+                android:text="SCHOOL"
+                android:textSize="16sp"/>
+
+            <RadioButton
+                android:id="@+id/rb_birthday"
+                android:layout_marginRight="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/anton"
+                android:letterSpacing="0.044"
+                android:text="BIRTHDAY"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/rb_holidays"
+                android:layout_marginRight="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/anton"
+                android:letterSpacing="0.044"
+                android:text="HOLIDAYS"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/rb_misc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/anton"
+                android:letterSpacing="0.044"
+                android:text="MISC"
+                android:textSize="16sp" />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/anton"
+            android:letterSpacing="0.044"
+            android:text="DESCRIPTION"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_wish_description"
+            android:layout_marginTop="2dp"
+            android:layout_width="338dp"
+            android:layout_height="111dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/dashed_border"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btn_add_wish"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="136dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/anton"
+            android:shadowColor="#000000"
+            android:shadowDx="4"
+            android:shadowDy="1"
+            android:shadowRadius="1"
+            android:text="ADD WISH"
+            android:textColor="#153BD3"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

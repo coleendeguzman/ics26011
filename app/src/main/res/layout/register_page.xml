@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#228AED"
-    tools:context=".LoginPage">
+    android:background="#00BF63"
+    tools:context=".RegisterPage">
+
 
     <ImageView
         android:id="@+id/imageView4"
@@ -15,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.096"
+        app:layout_constraintVertical_bias="0.066"
         app:srcCompat="@drawable/logo" />
 
     <ImageView
@@ -24,11 +25,11 @@
         android:layout_height="460dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.498"
-        app:srcCompat="@drawable/notepad" />
+        app:srcCompat="@drawable/notepad2" />
 
     <TextView
         android:id="@+id/textView1"
@@ -40,27 +41,28 @@
         android:shadowDx="5"
         android:shadowDy="3"
         android:shadowRadius="4"
-        android:text="TIME’S UP!"
-        android:textColor="#02D4F4"
+        android:text="SAY NOW!"
+        android:textColor="#F568C0"
         android:textSize="29sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.605"
+        app:layout_constraintHorizontal_bias="0.551"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.362" />
+        app:layout_constraintVertical_bias="0.323" />
 
     <ImageView
         android:id="@+id/ivSpark"
-        android:layout_width="142dp"
-        android:layout_height="149dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/ivNotepad"
-        app:layout_constraintHorizontal_bias="0.086"
+        app:layout_constraintEnd_toStartOf="@+id/textView1"
+        app:layout_constraintHorizontal_bias="0.64"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.364"
-        app:srcCompat="@drawable/spark" />
+
+        app:layout_constraintVertical_bias="0.304"
+        app:srcCompat="@drawable/spark2" />
 
     <TextView
         android:id="@+id/textView2"
@@ -73,14 +75,14 @@
         android:shadowDy="3"
         android:shadowRadius="2"
         android:text="PLEASE TELL ME NOW..."
-        android:textColor="#02D4F4"
+        android:textColor="#F568C0"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.621"
+        app:layout_constraintHorizontal_bias="0.593"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.335" />
+        app:layout_constraintVertical_bias="0.298" />
 
     <TextView
         android:id="@+id/textView3"
@@ -92,15 +94,15 @@
         android:shadowDx="5"
         android:shadowDy="3"
         android:shadowRadius="2"
-        android:text="GIVE ME YOUR WISHLIST"
-        android:textColor="#02D4F4"
+        android:text="WHAT'S THE BEST PRESENT"
+        android:textColor="#F568C0"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.628"
+        app:layout_constraintHorizontal_bias="0.632"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.401" />
+        app:layout_constraintVertical_bias="0.368" />
 
     <TextView
         android:id="@+id/textView4"
@@ -113,10 +115,10 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.307"
+        app:layout_constraintHorizontal_bias="0.308"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.473" />
+        app:layout_constraintVertical_bias="0.428" />
 
     <EditText
         android:id="@+id/etUsername"
@@ -133,7 +135,7 @@
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.513" />
+        app:layout_constraintVertical_bias="0.468" />
 
     <TextView
         android:id="@+id/textView5"
@@ -149,7 +151,7 @@
         app:layout_constraintHorizontal_bias="0.309"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.578" />
+        app:layout_constraintVertical_bias="0.523" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -166,25 +168,7 @@
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.619" />
-
-    <Button
-        android:id="@+id/btnLogin"
-        style="@style/Widget.Material3.Button.TextButton"
-        android:layout_width="107dp"
-        android:layout_height="54dp"
-        android:fontFamily="@font/anton"
-        android:letterSpacing="0.044"
-        android:text="@string/login"
-        android:textColor="#4835EE"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="@+id/ivNotepad"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.686" />
-
+        app:layout_constraintVertical_bias="0.563" />
 
     <TextView
         android:id="@+id/textView6"
@@ -192,7 +176,57 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/anton"
         android:letterSpacing="0.044"
-        android:text="DON'T HAVE AN ACCOUNT?"
+        android:text="CONFIRM PASSWORD"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.383"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.616" />
+
+    <EditText
+        android:id="@+id/etConfirmPassword"
+        android:layout_width="198dp"
+        android:layout_height="33dp"
+        android:background="@drawable/my_border"
+        android:ems="10"
+        android:fontFamily="@font/anton"
+        android:inputType="textPassword"
+        android:letterSpacing="0.05"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.658" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="121dp"
+        android:layout_height="56dp"
+        android:fontFamily="@font/anton"
+        android:letterSpacing="0.044"
+        android:text="@string/register"
+        android:textColor="#4835EE"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.73" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/anton"
+        android:letterSpacing="0.044"
+        android:text="ALREADY HAVE AN ACCOUNT?"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -200,13 +234,12 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.836" />
+        app:layout_constraintVertical_bias="0.865" />
 
     <TextView
-        android:id="@+id/tvSignUp"
-        style="@style/Widget.Material3.Button.TextButton"
-        android:layout_width="219dp"
-        android:layout_height="74dp"
+        android:id="@+id/tvLogin"
+        android:layout_width="217dp"
+        android:layout_height="61dp"
         android:clickable="true"
         android:fontFamily="@font/anton"
         android:letterSpacing="0.044"
@@ -214,16 +247,15 @@
         android:shadowDx="4"
         android:shadowDy="1"
         android:shadowRadius="1"
-        android:text="SIGN UP NOW!"
+        android:text="LOG IN NOW!"
         android:textAlignment="center"
-        android:textColor="#EAF404"
+        android:textColor="#4835EE"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="@+id/ivNotepad"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.901" />
-
+        app:layout_constraintVertical_bias="0.922" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

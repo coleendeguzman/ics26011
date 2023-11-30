@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00BF63"
-    tools:context=".HolidaysPage">
+    android:background="#FC3625"
+    tools:context=".MiscPage">
 
     <ImageView
-        android:id="@+id/ivHolidays"
+        android:id="@+id/ivMisc"
         android:layout_width="127dp"
         android:layout_height="105dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,21 +16,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.081"
-        app:srcCompat="@drawable/holidays" />
+        app:srcCompat="@drawable/misc" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:id="@+id/btn_add_wish"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="136dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="74dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="610dp"
-        android:text="Add wishes"
-        android:onClick="toWishCreation"
+        android:layout_gravity="center"
+        android:fontFamily="@font/anton"
+        android:shadowColor="#000000"
+        android:shadowDx="4"
+        android:shadowDy="1"
+        android:shadowRadius="1"
+        android:text="ADD WISH"
+        android:textColor="#228AED"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivHolidays"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivMisc"
+        app:layout_constraintVertical_bias="0.914" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
