@@ -38,7 +38,7 @@
 
         <EditText
             android:id="@+id/et_wish_name"
-            android:layout_width="336dp"
+            android:layout_width="320dp"
             android:layout_height="38dp"
             android:layout_marginLeft="15dp"
             android:background="@drawable/my_border"
@@ -62,7 +62,7 @@
 
         <EditText
             android:id="@+id/et_wish_link"
-            android:layout_width="336dp"
+            android:layout_width="320dp"
             android:layout_height="38dp"
             android:layout_marginLeft="15dp"
             android:background="@drawable/my_border"
@@ -86,7 +86,7 @@
 
         <EditText
             android:id="@+id/et_image_url"
-            android:layout_width="336dp"
+            android:layout_width="320dp"
             android:layout_height="38dp"
             android:layout_marginLeft="15dp"
             android:background="@drawable/my_border"
@@ -109,24 +109,22 @@
             android:textSize="16sp" />
 
         <RadioGroup
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/rb_school"
-                android:layout_marginRight= "4dp"
-                android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:fontFamily="@font/anton"
                 android:letterSpacing="0.044"
                 android:text="SCHOOL"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <RadioButton
                 android:id="@+id/rb_birthday"
-                android:layout_marginRight="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/anton"
@@ -136,7 +134,6 @@
 
             <RadioButton
                 android:id="@+id/rb_holidays"
-                android:layout_marginRight="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/anton"
@@ -169,10 +166,10 @@
 
         <EditText
             android:id="@+id/et_wish_description"
-            android:layout_marginTop="2dp"
-            android:layout_width="338dp"
+            android:layout_width="320dp"
             android:layout_height="111dp"
             android:layout_marginLeft="15dp"
+            android:layout_marginTop="2dp"
             android:background="@drawable/dashed_border"
             android:ems="10"
             android:gravity="start|top"
