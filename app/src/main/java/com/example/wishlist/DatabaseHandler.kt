@@ -15,7 +15,7 @@ data class User(
 class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_NAME, null, DATABASE_VERSION) {
 
         companion object {
-            private const val DATABASE_VERSION = 2
+            private const val DATABASE_VERSION = 4
             private const val DATABASE_NAME = "UserDatabase.db"
 
             private const val TABLE_USERS = "users"
@@ -27,8 +27,9 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
             private const val KEY_WISH_NAME = "wishname"
             private const val KEY_WISH_DESCRIPTION = "description"
             private const val KEY_WISH_LINK = "link"
-            private const val KEY_WISH_IMAGE = "image"
+            private const val KEY_WISH_IMAGE = "image link"
             private const val KEY_WISH_CATEGORY = "category"
+
         }
 
         override fun onCreate(db: SQLiteDatabase?) {
@@ -41,9 +42,10 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
 
         override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
             val CREATE_WISHES_TABLE = ("CREATE TABLE $TABLE_WISHES (" + "$KEY_WISH_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "$KEY_WISH_NAME TEXT," + "$KEY_WISH_DESCRIPTION TEXT," + "$KEY_WISH_LINK TEXT," + "$KEY_WISH_IMAGE BLOB," + "$KEY_WISH_CATEGORY TEXT)")
+                    "$KEY_WISH_NAME TEXT," + "$KEY_WISH_DESCRIPTION TEXT," + "$KEY_WISH_LINK TEXT," + "$KEY_WISH_IMAGE TEXT," + "$KEY_WISH_CATEGORY TEXT)")
 
             db?.execSQL(CREATE_WISHES_TABLE)
+
         }
     fun registerUser(username: String, password: String): Long {
         val db = this.writableDatabase
