@@ -18,7 +18,8 @@ data class Wishes(
     val wishname: String,
     val wishlink: String,
     val wishdesc: String,
-    val imageurl: String
+    val imageurl: String,
+    val category: String
 )
 class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_NAME, null, DATABASE_VERSION) {
 
@@ -55,13 +56,14 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
 
             db?.execSQL(CREATE_WISHES_TABLE)
         }
-    fun createWish(wishname: String, wishdesc: String, wishlink: String, imageurl: String): Long {
+    fun createWish(wishname: String, wishdesc: String, wishlink: String, imageurl: String, category: String): Long {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(KEY_WISH_NAME, wishname)
             put(KEY_WISH_DESCRIPTION, wishdesc)
             put(KEY_WISH_LINK, wishlink)
             put(KEY_WISH_IMAGE, imageurl)
+            put(KEY_WISH_CATEGORY, category)
         }
 
         val successwish = db.insert(TABLE_WISHES, null, values)
@@ -121,5 +123,35 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
                 null
             }
         }
+    }
+
+    fun getWishesByCategory(category: String): List<Wishes> {
+        val wishList = mutableListOf<Wishes>()
+        val db = this.readableDatabase
+        val selection = "$KEY_WISH_CATEGORY = ?"
+        val selectionArgs = arrayOf(category)
+        val cursor = db.query(TABLE_WISHES, null, selection, selectionArgs, null, null, null)
+
+        cursor.use {
+            while (it.moveToNext()) {
+                val wishnameIndex = it.getColumnIndex(KEY_WISH_NAME)
+                val wishdescIndex = it.getColumnIndex(KEY_WISH_DESCRIPTION)
+                val wishlinkIndex = it.getColumnIndex(KEY_WISH_LINK)
+                val imageurlIndex = it.getColumnIndex(KEY_WISH_IMAGE)
+                val categoryIndex = it.getColumnIndex(KEY_WISH_CATEGORY)
+
+                val wish = Wishes(
+                    it.getString(wishnameIndex),
+                    it.getString(wishdescIndex),
+                    it.getString(wishlinkIndex),
+                    it.getString(imageurlIndex),
+                    it.getString(categoryIndex)
+                )
+
+                wishList.add(wish)
+            }
+        }
+        db.close()
+        return wishList
     }
 }

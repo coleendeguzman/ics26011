@@ -40,6 +40,7 @@
             android:id="@+id/et_wish_name"
             android:layout_width="320dp"
             android:layout_height="38dp"
+            android:paddingLeft="4dp"
             android:layout_marginLeft="15dp"
             android:background="@drawable/my_border"
             android:ems="10"
@@ -64,6 +65,7 @@
             android:id="@+id/et_wish_link"
             android:layout_width="320dp"
             android:layout_height="38dp"
+            android:paddingLeft="4dp"
             android:layout_marginLeft="15dp"
             android:background="@drawable/my_border"
             android:ems="10"
@@ -88,6 +90,7 @@
             android:id="@+id/et_image_url"
             android:layout_width="320dp"
             android:layout_height="38dp"
+            android:paddingLeft="4dp"
             android:layout_marginLeft="15dp"
             android:background="@drawable/my_border"
             android:ems="10"
@@ -111,7 +114,8 @@
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/rg_category">
 
             <RadioButton
                 android:id="@+id/rb_school"
@@ -169,6 +173,8 @@
             android:layout_width="320dp"
             android:layout_height="111dp"
             android:layout_marginLeft="15dp"
+            android:fontFamily="@font/anton"
+            android:paddingLeft="4dp"
             android:layout_marginTop="2dp"
             android:background="@drawable/dashed_border"
             android:ems="10"

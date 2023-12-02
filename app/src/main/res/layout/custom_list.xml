@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/linearLayout">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvWishName"
+        android:text="Wish Name"
+        android:layout_marginLeft="5dp"
+        android:fontFamily="@font/anton"
+        android:letterSpacing="0.044"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/tvWishLink"
+        android:text="Link"
+        android:fontFamily="@font/anton"
+        android:letterSpacing="0.044"
+        android:textStyle="italic"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/tvDescription"
+        android:text="Description"
+        android:fontFamily="@font/anton"
+        android:letterSpacing="0.044" />
+
+</LinearLayout>
