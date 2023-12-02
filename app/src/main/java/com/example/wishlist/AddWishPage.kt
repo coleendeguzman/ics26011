@@ -1,5 +1,6 @@
 package com.example.wishlist
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -27,14 +28,18 @@ class AddWishPage : AppCompatActivity() {
             val wishlink = etWishLink.text.toString()
             val imageurl = etImageUrl.text.toString()
 
+
             if (wishname.trim().isNotEmpty() && wishlink.trim().isNotEmpty() && wishdesc.trim()
                     .isNotEmpty()
             ) {
                 val wishSuccess = dbHandler.createWish(wishname, wishdesc, wishlink, imageurl)
 
                 if (wishSuccess != -1L) {
+
                     Toast.makeText(this, "Entry successful!", Toast.LENGTH_LONG)
                         .show()
+                    val i = Intent(this, HomePage::class.java)
+                    startActivity(i)
                 } else {
 
                     Toast.makeText(
