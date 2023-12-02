@@ -1,5 +1,6 @@
 package com.example.wishlist
 
+import android.content.ClipDescription
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
@@ -12,10 +13,17 @@ data class User(
     val username: String,
     val password: String
 )
+
+data class Wishes(
+    val wishname: String,
+    val wishlink: String,
+    val wishdesc: String,
+    val imageurl: String
+)
 class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_NAME, null, DATABASE_VERSION) {
 
         companion object {
-            private const val DATABASE_VERSION = 4
+            private const val DATABASE_VERSION = 6
             private const val DATABASE_NAME = "UserDatabase.db"
 
             private const val TABLE_USERS = "users"
@@ -27,10 +35,11 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
             private const val KEY_WISH_NAME = "wishname"
             private const val KEY_WISH_DESCRIPTION = "description"
             private const val KEY_WISH_LINK = "link"
-            private const val KEY_WISH_IMAGE = "image link"
+            private const val KEY_WISH_IMAGE = "imagelink"
             private const val KEY_WISH_CATEGORY = "category"
 
         }
+
 
         override fun onCreate(db: SQLiteDatabase?) {
             val CREATE_USERS_TABLE = ("CREATE TABLE $TABLE_USERS (" +
@@ -45,8 +54,21 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
                     "$KEY_WISH_NAME TEXT," + "$KEY_WISH_DESCRIPTION TEXT," + "$KEY_WISH_LINK TEXT," + "$KEY_WISH_IMAGE TEXT," + "$KEY_WISH_CATEGORY TEXT)")
 
             db?.execSQL(CREATE_WISHES_TABLE)
-
         }
+    fun createWish(wishname: String, wishdesc: String, wishlink: String, imageurl: String): Long {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(KEY_WISH_NAME, wishname)
+            put(KEY_WISH_DESCRIPTION, wishdesc)
+            put(KEY_WISH_LINK, wishlink)
+            put(KEY_WISH_IMAGE, imageurl)
+        }
+
+        val successwish = db.insert(TABLE_WISHES, null, values)
+        db.close()
+
+        return successwish
+    }
     fun registerUser(username: String, password: String): Long {
         val db = this.writableDatabase
         val values = ContentValues().apply {
