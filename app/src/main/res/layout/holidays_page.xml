@@ -26,24 +26,25 @@
             android:layout_height="430dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
+            android:dividerHeight="1dp"
             tools:layout_editor_absoluteX="40dp"
             tools:layout_editor_absoluteY="179dp" />
 
         <Button
-        android:id="@+id/addWish"
-        style="@style/Widget.Material3.Button.TextButton"
-        android:layout_width="136dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:fontFamily="@font/anton"
-        android:shadowColor="#000000"
-        android:shadowDx="4"
-        android:shadowDy="1"
-        android:shadowRadius="1"
-        android:text="ADD WISH"
-        android:textColor="#FC3625"
-        android:textSize="24sp" />
+            android:id="@+id/addWish"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="136dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:fontFamily="@font/anton"
+            android:shadowColor="#000000"
+            android:shadowDx="4"
+            android:shadowDy="1"
+            android:shadowRadius="1"
+            android:text="ADD WISH"
+            android:textColor="#FC3625"
+            android:textSize="24sp" />
 
     </LinearLayout>
 

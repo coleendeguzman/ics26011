@@ -1,12 +1,15 @@
 package com.example.wishlist
 
-import android.content.ClipDescription
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
-import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.wishlist.WishModelClass
+
+
 
 
 data class User(
@@ -23,40 +26,48 @@ data class Wishes(
 )
 class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_NAME, null, DATABASE_VERSION) {
 
-        companion object {
-            private const val DATABASE_VERSION = 6
-            private const val DATABASE_NAME = "UserDatabase.db"
+    companion object {
+        private const val DATABASE_VERSION = 6
+        private const val DATABASE_NAME = "UserDatabase.db"
 
-            private const val TABLE_USERS = "users"
-            private const val KEY_USERNAME = "username"
-            private const val KEY_PASSWORD = "password"
+        private const val TABLE_USERS = "users"
+        private const val KEY_USERNAME = "username"
+        private const val KEY_PASSWORD = "password"
 
-            private const val TABLE_WISHES = "wishes"
-            private const val KEY_WISH_ID = "id"
-            private const val KEY_WISH_NAME = "wishname"
-            private const val KEY_WISH_DESCRIPTION = "description"
-            private const val KEY_WISH_LINK = "link"
-            private const val KEY_WISH_IMAGE = "imagelink"
-            private const val KEY_WISH_CATEGORY = "category"
+        private const val TABLE_WISHES = "wishes"
+        private const val KEY_WISH_ID = "id"
+        private const val KEY_WISH_NAME = "wishname"
+        private const val KEY_WISH_DESCRIPTION = "description"
+        private const val KEY_WISH_LINK = "link"
+        private const val KEY_WISH_IMAGE = "imagelink"
+        private const val KEY_WISH_CATEGORY = "category"
 
-        }
+    }
 
 
-        override fun onCreate(db: SQLiteDatabase?) {
-            val CREATE_USERS_TABLE = ("CREATE TABLE $TABLE_USERS (" +
-                    "$KEY_USERNAME TEXT PRIMARY KEY," +
-                    "$KEY_PASSWORD TEXT)")
+    override fun onCreate(db: SQLiteDatabase?) {
+        val CREATE_USERS_TABLE = ("CREATE TABLE $TABLE_USERS (" +
+                "$KEY_USERNAME TEXT PRIMARY KEY," +
+                "$KEY_PASSWORD TEXT)")
 
-            db?.execSQL(CREATE_USERS_TABLE)
-        }
+        db?.execSQL(CREATE_USERS_TABLE)
+    }
 
-        override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-            val CREATE_WISHES_TABLE = ("CREATE TABLE $TABLE_WISHES (" + "$KEY_WISH_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+        val CREATE_WISHES_TABLE =
+            ("CREATE TABLE $TABLE_WISHES (" + "$KEY_WISH_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "$KEY_WISH_NAME TEXT," + "$KEY_WISH_DESCRIPTION TEXT," + "$KEY_WISH_LINK TEXT," + "$KEY_WISH_IMAGE TEXT," + "$KEY_WISH_CATEGORY TEXT)")
 
-            db?.execSQL(CREATE_WISHES_TABLE)
-        }
-    fun createWish(wishname: String, wishdesc: String, wishlink: String, imageurl: String, category: String): Long {
+        db?.execSQL(CREATE_WISHES_TABLE)
+    }
+
+    fun createWish(
+        wishname: String,
+        wishdesc: String,
+        wishlink: String,
+        imageurl: String,
+        category: String
+    ): Long {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(KEY_WISH_NAME, wishname)
@@ -71,6 +82,37 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
 
         return successwish
     }
+
+    @SuppressLint("Range")
+    fun viewWishes(): List<WishModelClass> {
+        val empList: ArrayList<WishModelClass> = ArrayList<WishModelClass>()
+        val selectQuery = "Select * FROM $TABLE_WISHES"
+        val db = this.readableDatabase
+        var cursor: Cursor? = null
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: SQLiteException) {
+            db.execSQL(selectQuery)
+            return ArrayList()
+        }
+        var wishName: String
+        var wishLink: String
+        var wishDesc: String
+        if (cursor.moveToFirst()) {
+            do {
+                wishName = cursor.getInt(cursor.getColumnIndex("wishname")).toString()
+                wishLink = cursor.getInt(cursor.getColumnIndex("link")).toString()
+                wishDesc = cursor.getInt(cursor.getColumnIndex("description")).toString()
+                val emp = WishModelClass(wishName = wishName, wishLink = wishLink, wishDesc = wishDesc)
+                empList.add(emp)
+            } while (cursor.moveToNext())
+
+        }
+        return empList
+    }
+
+
+
     fun registerUser(username: String, password: String): Long {
         val db = this.writableDatabase
         val values = ContentValues().apply {
