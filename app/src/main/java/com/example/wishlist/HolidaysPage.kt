@@ -19,11 +19,12 @@ class HolidaysPage : AppCompatActivity() {
 
         db = DatabaseHandler(this)
 
-        wishAdapter = WishAdapter(db.getWishesByCategory("BIRTHDAY"), this)
+        wishAdapter = WishAdapter(db.getWishesByCategory("HOLIDAYS"), this)
         binding.HolidaysRecycler.layoutManager = LinearLayoutManager(this)
         binding.HolidaysRecycler.adapter = wishAdapter
 
-        val btnAddWish = findViewById<Button>(R.id.btn_add_wish)
+        val btnAddWish = findViewById<Button>(R.id.addWish)
+
         btnAddWish.setOnClickListener {
             val i = Intent(this, AddWishPage::class.java)
             startActivity(i)
@@ -32,7 +33,7 @@ class HolidaysPage : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        wishAdapter.refreshData(db.getWishesByCategory("BIRTHDAY"))
+        wishAdapter.refreshData(db.getWishesByCategory("HOLIDAYS"))
     }
 }
 
