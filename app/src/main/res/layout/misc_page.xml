@@ -9,14 +9,24 @@
 
     <ImageView
         android:id="@+id/ivMisc"
-        android:layout_width="127dp"
-        android:layout_height="105dp"
+        android:layout_width="143dp"
+        android:layout_height="101dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.081"
         app:srcCompat="@drawable/misc" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/MiscRecycler"
+        android:layout_width="399dp"
+        android:layout_height="469dp"
+        android:padding="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_add_wish"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivMisc" />
 
     <Button
         android:id="@+id/btn_add_wish"
