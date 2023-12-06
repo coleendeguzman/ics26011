@@ -20,15 +20,14 @@
             android:layout_height="105dp"
             app:srcCompat="@drawable/holidays" />
 
-        <ListView
-            android:layout_width="344dp"
-            android:id="@+id/listViewHolidays"
-            android:layout_height="430dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:dividerHeight="1dp"
-            tools:layout_editor_absoluteX="40dp"
-            tools:layout_editor_absoluteY="179dp" />
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/HolidaysRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="471dp"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <Button
             android:id="@+id/addWish"

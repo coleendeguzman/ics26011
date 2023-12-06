@@ -7,36 +7,37 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.wishlist.databinding.BirthdayPageBinding
+import com.example.wishlist.databinding.HolidaysPageBinding
 
 
 class HolidaysPage : AppCompatActivity() {
 
-    private lateinit var listView: ListView
-    private lateinit var wishAdapter: ListAdapter
+    private lateinit var binding: HolidaysPageBinding
+    private lateinit var db: DatabaseHandler
+    private lateinit var wishAdapter: BirthdayWishAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.holidays_page)
+        binding = HolidaysPageBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        listView = findViewById(R.id.listViewHolidays)
-        val dbHandler = DatabaseHandler(this)
-        val category = "HOLIDAYS"
+        db = DatabaseHandler(this)
 
-        val wishes = dbHandler.getWishesByCategory(category)
+        wishAdapter = BirthdayWishAdapter(db.getWishesByCategory("HOLIDAY"), this)
+        binding.HolidaysRecycler.layoutManager = LinearLayoutManager(this)
+        binding.HolidaysRecycler.adapter = wishAdapter
 
-        val wishnames = wishes.map { it.wishname }.toTypedArray()
-        val wishlinks = wishes.map { it.wishlink }.toTypedArray()
-        val wishdescs = wishes.map { it.wishdesc }.toTypedArray()
-
-        wishAdapter = ListAdapter(this, wishnames, wishlinks, wishdescs)
-        listView.adapter = wishAdapter
-
-        val btnAddWish = findViewById<Button>(R.id.addWish)
-
+        val btnAddWish = findViewById<Button>(R.id.btn_add_wish)
         btnAddWish.setOnClickListener {
             val i = Intent(this, AddWishPage::class.java)
             startActivity(i)
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        wishAdapter.refreshData(db.getWishesByCategory("HOLIDAY"))
+    }
 }
