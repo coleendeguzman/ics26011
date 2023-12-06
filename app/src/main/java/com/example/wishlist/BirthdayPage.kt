@@ -11,7 +11,7 @@ import com.example.wishlist.databinding.SchoolPageBinding
 class BirthdayPage : AppCompatActivity() {
     private lateinit var binding: BirthdayPageBinding
     private lateinit var db: DatabaseHandler
-    private lateinit var wishAdapter: BirthdayWishAdapter
+    private lateinit var wishAdapter: WishAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +20,7 @@ class BirthdayPage : AppCompatActivity() {
 
         db = DatabaseHandler(this)
 
-        wishAdapter = BirthdayWishAdapter(db.getWishesByCategory("BIRTHDAY"), this)
+        wishAdapter = WishAdapter(db.getWishesByCategory("BIRTHDAY"), this)
         binding.BirthdayRecycler.layoutManager = LinearLayoutManager(this)
         binding.BirthdayRecycler.adapter = wishAdapter
 
@@ -36,3 +36,4 @@ class BirthdayPage : AppCompatActivity() {
         wishAdapter.refreshData(db.getWishesByCategory("BIRTHDAY"))
     }
 }
+

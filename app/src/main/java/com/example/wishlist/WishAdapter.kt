@@ -7,15 +7,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class SchoolWishAdapter(private var wishes: List<Wishes>, context: Context) : RecyclerView.Adapter<SchoolWishAdapter.WishViewHolder>() {
+class WishAdapter(private var wishes: List<Wishes>, context: Context) : RecyclerView.Adapter<WishAdapter.WishViewHolder>() {
 
     class WishViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val titleTextView: TextView = itemView.findViewById(R.id.schoolWishTitle)
-        val descTextView: TextView = itemView.findViewById(R.id.schoolWishDesc)
+        val titleTextView: TextView = itemView.findViewById(R.id.wishTitle)
+        val linkTextView: TextView = itemView.findViewById(R.id.wishLink)
+        val descTextView: TextView = itemView.findViewById(R.id.wishDesc)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WishViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.school_wish, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.recycler_custom, parent, false)
         return WishViewHolder(view)
     }
 
@@ -24,6 +25,7 @@ class SchoolWishAdapter(private var wishes: List<Wishes>, context: Context) : Re
     override fun onBindViewHolder(holder: WishViewHolder, position: Int) {
         val wish = wishes[position]
         holder.titleTextView.text = wish.wishname
+        holder.linkTextView.text = wish.wishlink
         holder.descTextView.text = wish.wishdesc
     }
 

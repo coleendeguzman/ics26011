@@ -3,20 +3,14 @@ package com.example.wishlist
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.ListView
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.wishlist.databinding.BirthdayPageBinding
 import com.example.wishlist.databinding.HolidaysPageBinding
 
-
 class HolidaysPage : AppCompatActivity() {
-
     private lateinit var binding: HolidaysPageBinding
     private lateinit var db: DatabaseHandler
-    private lateinit var wishAdapter: BirthdayWishAdapter
+    private lateinit var wishAdapter: WishAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +19,7 @@ class HolidaysPage : AppCompatActivity() {
 
         db = DatabaseHandler(this)
 
-        wishAdapter = BirthdayWishAdapter(db.getWishesByCategory("HOLIDAY"), this)
+        wishAdapter = WishAdapter(db.getWishesByCategory("BIRTHDAY"), this)
         binding.HolidaysRecycler.layoutManager = LinearLayoutManager(this)
         binding.HolidaysRecycler.adapter = wishAdapter
 
@@ -38,6 +32,7 @@ class HolidaysPage : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        wishAdapter.refreshData(db.getWishesByCategory("HOLIDAY"))
+        wishAdapter.refreshData(db.getWishesByCategory("BIRTHDAY"))
     }
 }
+

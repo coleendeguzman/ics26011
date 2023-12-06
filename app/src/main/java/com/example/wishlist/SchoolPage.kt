@@ -11,7 +11,7 @@ class SchoolPage : AppCompatActivity() {
 
     private lateinit var binding: SchoolPageBinding
     private lateinit var db: DatabaseHandler
-    private lateinit var wishAdapter: SchoolWishAdapter
+    private lateinit var wishAdapter: WishAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +20,7 @@ class SchoolPage : AppCompatActivity() {
 
         db = DatabaseHandler(this)
 
-        wishAdapter = SchoolWishAdapter(db.getWishesByCategory("SCHOOL"), this)
+        wishAdapter = WishAdapter(db.getWishesByCategory("SCHOOL"), this)
         binding.SchoolRecycler.layoutManager = LinearLayoutManager(this)
         binding.SchoolRecycler.adapter = wishAdapter
 
