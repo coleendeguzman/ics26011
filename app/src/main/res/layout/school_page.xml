@@ -21,8 +21,8 @@
     <androidx.recyclerview.widget.RecyclerView
 
         android:id="@+id/SchoolRecycler"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="398dp"
+        android:layout_height="471dp"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

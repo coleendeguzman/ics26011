@@ -9,14 +9,25 @@
 
     <ImageView
         android:id="@+id/ivBirthday"
-        android:layout_width="153dp"
-        android:layout_height="128dp"
+        android:layout_width="140dp"
+        android:layout_height="103dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.066"
         app:srcCompat="@drawable/birthday" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/BirthdayRecycler"
+        android:layout_width="400dp"
+        android:layout_height="440dp"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivBirthday" />
 
     <Button
         android:id="@+id/btn_add_wish"

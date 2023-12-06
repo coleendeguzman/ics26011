@@ -10,8 +10,6 @@ import android.database.sqlite.SQLiteOpenHelper
 import com.example.wishlist.WishModelClass
 
 
-
-
 data class User(
     val username: String,
     val password: String
@@ -52,7 +50,18 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
                 "$KEY_PASSWORD TEXT)")
 
         db?.execSQL(CREATE_USERS_TABLE)
+
+        val CREATE_WISHES_TABLE = ("CREATE TABLE $TABLE_WISHES (" +
+                "$KEY_WISH_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "$KEY_WISH_NAME TEXT," +
+                "$KEY_WISH_DESCRIPTION TEXT," +
+                "$KEY_WISH_LINK TEXT," +
+                "$KEY_WISH_IMAGE TEXT," +
+                "$KEY_WISH_CATEGORY TEXT)")
+
+        db?.execSQL(CREATE_WISHES_TABLE)
     }
+
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         val CREATE_WISHES_TABLE =
@@ -84,27 +93,8 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
         return successwish
     }
 
-    fun getAllWishes(): List<Wishes> {
-        val wishList = mutableListOf<Wishes>()
-        val db = this.readableDatabase
-        val query = "SELECT * FROM $TABLE_WISHES"
-        val cursor = db.rawQuery(query, null)
 
-        while (cursor.moveToNext()) {
-            val id = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_WISH_ID))
-            val name = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_NAME))
-            val desc = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_DESCRIPTION))
-            val link = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_LINK))
-            val imglink = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_IMAGE))
-            val cat = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_CATEGORY))
 
-            val wish = Wishes(id, name, desc, link, imglink, cat)
-            wishList.add(wish)
-        }
-        cursor.close()
-        db.close()
-        return wishList
-    }
 
     fun registerUser(username: String, password: String): Long {
         val db = this.writableDatabase
@@ -155,39 +145,50 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
             }
         }
     }
-
-    fun getWishesByCategory(category: String): List<Wishes> {
+    fun getAllWishes(): List<Wishes> {
         val wishList = mutableListOf<Wishes>()
         val db = this.readableDatabase
-        val selection = "$KEY_WISH_CATEGORY = ?"
-        val selectionArgs = arrayOf(category)
-        val cursor = db.query(TABLE_WISHES, null, selection, selectionArgs, null, null, null)
+        val query = "SELECT * FROM $TABLE_WISHES"
+        val cursor = db.rawQuery(query, null)
 
-        cursor.use {
-            while (it.moveToNext()) {
-                val wishidIndex = it.getColumnIndex(KEY_WISH_ID)
-                val wishnameIndex = it.getColumnIndex(KEY_WISH_NAME)
-                val wishdescIndex = it.getColumnIndex(KEY_WISH_DESCRIPTION)
-                val wishlinkIndex = it.getColumnIndex(KEY_WISH_LINK)
-                val imageurlIndex = it.getColumnIndex(KEY_WISH_IMAGE)
-                val categoryIndex = it.getColumnIndex(KEY_WISH_CATEGORY)
+        while (cursor.moveToNext()) {
+            val id = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_WISH_ID))
+            val name = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_NAME))
+            val desc = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_DESCRIPTION))
+            val link = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_LINK))
+            val imglink = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_IMAGE))
+            val cat = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_CATEGORY))
 
-                val wish = Wishes(
-                    it.getInt(wishidIndex),
-                    it.getString(wishnameIndex),
-                    it.getString(wishdescIndex),
-                    it.getString(wishlinkIndex),
-                    it.getString(imageurlIndex),
-                    it.getString(categoryIndex)
-                )
-
-                wishList.add(wish)
-            }
+            val wish = Wishes(id, name, desc, link, imglink, cat)
+            wishList.add(wish)
         }
+        cursor.close()
         db.close()
         return wishList
     }
 
+    fun getWishesByCategory(category: String): List<Wishes> {
+        val wishList = mutableListOf<Wishes>()
+        val db = this.readableDatabase
+        val query = "SELECT * FROM $TABLE_WISHES WHERE $KEY_WISH_CATEGORY = ?"
+        val selectionArgs = arrayOf(category)
+        val cursor = db.rawQuery(query, selectionArgs)
+
+        while (cursor.moveToNext()) {
+            val id = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_WISH_ID))
+            val name = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_NAME))
+            val desc = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_DESCRIPTION))
+            val link = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_LINK))
+            val imglink = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_IMAGE))
+            val cat = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_CATEGORY))
+
+            val wish = Wishes(id, name, desc, link, imglink, cat)
+            wishList.add(wish)
+        }
+        cursor.close()
+        db.close()
+        return wishList
+    }
 }
 
 

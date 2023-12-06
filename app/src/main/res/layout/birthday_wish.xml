@@ -5,13 +5,13 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="5dp"
     app:cardElevation="4dp"
+    app:cardBackgroundColor="#00BF63"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/dialog_border"
-
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -28,7 +28,7 @@
                 android:text="Title"
                 android:fontFamily="@font/anton"
                 android:letterSpacing="0.044"
-                android:textColor="#FF8000"
+                android:textColor="#4332DE"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
 
