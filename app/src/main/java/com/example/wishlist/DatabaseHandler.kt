@@ -18,6 +18,7 @@ data class User(
 )
 
 data class Wishes(
+    val id: Int,
     val wishname: String,
     val wishlink: String,
     val wishdesc: String,
@@ -83,35 +84,27 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
         return successwish
     }
 
-    @SuppressLint("Range")
-    fun viewWishes(): List<WishModelClass> {
-        val empList: ArrayList<WishModelClass> = ArrayList<WishModelClass>()
-        val selectQuery = "Select * FROM $TABLE_WISHES"
+    fun getAllWishes(): List<Wishes> {
+        val wishList = mutableListOf<Wishes>()
         val db = this.readableDatabase
-        var cursor: Cursor? = null
-        try {
-            cursor = db.rawQuery(selectQuery, null)
-        } catch (e: SQLiteException) {
-            db.execSQL(selectQuery)
-            return ArrayList()
-        }
-        var wishName: String
-        var wishLink: String
-        var wishDesc: String
-        if (cursor.moveToFirst()) {
-            do {
-                wishName = cursor.getInt(cursor.getColumnIndex("wishname")).toString()
-                wishLink = cursor.getInt(cursor.getColumnIndex("link")).toString()
-                wishDesc = cursor.getInt(cursor.getColumnIndex("description")).toString()
-                val emp = WishModelClass(wishName = wishName, wishLink = wishLink, wishDesc = wishDesc)
-                empList.add(emp)
-            } while (cursor.moveToNext())
+        val query = "SELECT * FROM $TABLE_WISHES"
+        val cursor = db.rawQuery(query, null)
 
+        while (cursor.moveToNext()) {
+            val id = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_WISH_ID))
+            val name = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_NAME))
+            val desc = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_DESCRIPTION))
+            val link = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_LINK))
+            val imglink = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_IMAGE))
+            val cat = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_CATEGORY))
+
+            val wish = Wishes(id, name, desc, link, imglink, cat)
+            wishList.add(wish)
         }
-        return empList
+        cursor.close()
+        db.close()
+        return wishList
     }
-
-
 
     fun registerUser(username: String, password: String): Long {
         val db = this.writableDatabase
@@ -154,14 +147,10 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
                         it.getString(usernameIndex),
                         it.getString(passwordIndex)
                     )
-                }
-
-                else {
+                } else {
                     null
                 }
-            }
-
-            else {
+            } else {
                 null
             }
         }
@@ -176,6 +165,7 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
 
         cursor.use {
             while (it.moveToNext()) {
+                val wishidIndex = it.getColumnIndex(KEY_WISH_ID)
                 val wishnameIndex = it.getColumnIndex(KEY_WISH_NAME)
                 val wishdescIndex = it.getColumnIndex(KEY_WISH_DESCRIPTION)
                 val wishlinkIndex = it.getColumnIndex(KEY_WISH_LINK)
@@ -183,6 +173,7 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
                 val categoryIndex = it.getColumnIndex(KEY_WISH_CATEGORY)
 
                 val wish = Wishes(
+                    it.getInt(wishidIndex),
                     it.getString(wishnameIndex),
                     it.getString(wishdescIndex),
                     it.getString(wishlinkIndex),
@@ -196,4 +187,7 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
         db.close()
         return wishList
     }
+
 }
+
+
