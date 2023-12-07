@@ -18,7 +18,6 @@ class AddWishPage : AppCompatActivity() {
     private lateinit var etWishName: EditText
     private lateinit var etWishDesc: EditText
     private lateinit var etWishLink: EditText
-    private lateinit var etImageUrl: EditText
     private lateinit var radioGroup: RadioGroup
     private lateinit var dbHandler: DatabaseHandler
 
@@ -31,7 +30,6 @@ class AddWishPage : AppCompatActivity() {
         etWishName = findViewById(R.id.et_wish_name)
         etWishDesc = findViewById(R.id.et_wish_description)
         etWishLink = findViewById(R.id.et_wish_link)
-        etImageUrl = findViewById(R.id.et_image_url)
         radioGroup = findViewById(R.id.rg_category)
 
         val btnAddWish = findViewById<Button>(R.id.btn_add_wish)
@@ -45,7 +43,6 @@ class AddWishPage : AppCompatActivity() {
         val wishname = etWishName.text.toString()
         val wishdesc = etWishDesc.text.toString()
         val wishlink = etWishLink.text.toString()
-        val imageurl = etImageUrl.text.toString()
 
         val checkedRadioButtonId = radioGroup.checkedRadioButtonId
 
@@ -54,7 +51,7 @@ class AddWishPage : AppCompatActivity() {
             val selectedCategory = checkedRadioButton.text.toString()
 
             if (wishname.trim().isNotEmpty() && wishlink.trim().isNotEmpty() && wishdesc.trim().isNotEmpty()) {
-                showConfirmationDialog(wishname, wishlink, wishdesc, imageurl, selectedCategory)
+                showConfirmationDialog(wishname, wishlink, wishdesc, selectedCategory)
             } else {
                 showToast("Required Fields left Empty. Please try again.")
             }
@@ -67,7 +64,6 @@ class AddWishPage : AppCompatActivity() {
         wishname: String,
         wishlink: String,
         wishdesc: String,
-        imageurl: String,
         selectedCategory: String
     ) {
         val dialog = Dialog(this)
@@ -77,7 +73,7 @@ class AddWishPage : AppCompatActivity() {
 
         dialog.findViewById<Button>(R.id.btnYes).setOnClickListener {
             dialog.dismiss()
-            val wishSuccess = dbHandler.createWish(wishname, wishlink, wishdesc, imageurl, selectedCategory)
+            val wishSuccess = dbHandler.createWish(wishname, wishlink, wishdesc, selectedCategory)
 
             if (wishSuccess != -1L) {
                 showToast("Entry successful!")

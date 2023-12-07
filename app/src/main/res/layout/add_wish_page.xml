@@ -20,9 +20,9 @@
             android:layout_width="146dp"
             android:layout_height="137dp"
             android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:paddingBottom="10dp"
-
-            app:srcCompat="@android:drawable/ic_menu_gallery" />
+            android:src="@drawable/logo"/>
 
         <TextView
             android:id="@+id/etWishName"
@@ -31,7 +31,8 @@
             android:layout_marginLeft="15dp"
             android:fontFamily="@font/anton"
             android:letterSpacing="0.044"
-            android:text="ITEM NAME"
+            android:text="WISH NAME"
+            android:layout_marginTop="40dp"
             android:textColor="#000000"
             android:textSize="16sp"
             app:layout_constraintVertical_bias="0.266" />
@@ -54,10 +55,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/anton"
             android:letterSpacing="0.044"
-            android:text="ITEM LINK"
+            android:text="WISH LINK"
             android:textColor="#000000"
             android:textSize="16sp" />
 
@@ -75,36 +76,11 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tvImageURL"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/anton"
-            android:letterSpacing="0.044"
-            android:text="IMAGE URL"
-            android:textColor="#000000"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/et_image_url"
-            android:layout_width="320dp"
-            android:layout_height="38dp"
-            android:paddingLeft="4dp"
-            android:layout_marginLeft="15dp"
-            android:background="@drawable/my_border"
-            android:ems="10"
-            android:fontFamily="@font/anton"
-            android:inputType="text"
-            android:letterSpacing="0.05"
-            android:textSize="16sp" />
-
-        <TextView
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/anton"
             android:letterSpacing="0.044"
             android:text="CATEGORY"
@@ -161,7 +137,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/anton"
             android:letterSpacing="0.044"
             android:text="DESCRIPTION"
@@ -188,7 +164,7 @@
             android:layout_width="136dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:fontFamily="@font/anton"
             android:shadowColor="#000000"
             android:shadowDx="4"
