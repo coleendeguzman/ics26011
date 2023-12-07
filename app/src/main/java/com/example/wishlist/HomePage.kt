@@ -32,19 +32,19 @@ class HomePage : AppCompatActivity() {
         }
 
         btnBirthday.setOnClickListener {
-            val i = Intent(this, SchoolPage::class.java)
+            val i = Intent(this, BirthdayPage::class.java)
             i.putExtra("USERNAME", username) // Pass the username to AddWishActivity
             startActivity(i)
         }
 
         btnHolidays.setOnClickListener {
-            val i = Intent(this, SchoolPage::class.java)
+            val i = Intent(this, HolidaysPage::class.java)
             i.putExtra("USERNAME", username) // Pass the username to AddWishActivity
             startActivity(i)
         }
 
         btnMisc.setOnClickListener {
-            val i = Intent(this, SchoolPage::class.java)
+            val i = Intent(this, MiscPage::class.java)
             i.putExtra("USERNAME", username) // Pass the username to AddWishActivity
             startActivity(i)
         }

@@ -186,6 +186,13 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
         db.close()
         return wishList
     }
+
+    fun deleteWishById(id: Int): Int {
+        val db = this.writableDatabase
+        val success = db.delete(TABLE_WISHES, "$KEY_WISH_ID=?", arrayOf(id.toString()))
+        db.close()
+        return success
+    }
 }
 
 
