@@ -23,7 +23,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/BirthdayRecycler"
             android:layout_width="match_parent"
-            android:layout_height="472dp"
+            android:layout_height="529dp"
             android:layout_marginTop="16dp"
             android:padding="16dp"
             app:layout_constraintTop_toBottomOf="@+id/ivBirthday" />
