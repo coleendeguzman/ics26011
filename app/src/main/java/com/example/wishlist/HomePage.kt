@@ -1,8 +1,12 @@
 package com.example.wishlist
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Window
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
@@ -50,12 +54,29 @@ class HomePage : AppCompatActivity() {
         }
 
         btnLogout.setOnClickListener {
-            val intent = Intent(this, LoginPage::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-            finish()
+            val dialog = Dialog(this)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setContentView(R.layout.logout_dialog)
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+            dialog.setCanceledOnTouchOutside(false)
+
+            val btnCancelLogout = dialog.findViewById<Button>(R.id.btnNo)
+            val btnConfirmLogout = dialog.findViewById<Button>(R.id.btnYes)
+
+            btnCancelLogout.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            btnConfirmLogout.setOnClickListener {
+                dialog.dismiss()
+                val i = Intent(this, LoginPage::class.java)
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(i)
+                finish()
+            }
+
+            dialog.show()
         }
-
-
     }
 }
