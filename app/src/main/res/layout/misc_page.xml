@@ -20,8 +20,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/MiscRecycler"
-        android:layout_width="399dp"
-        android:layout_height="469dp"
+        android:layout_width="396dp"
+        android:layout_height="517dp"
         android:padding="16dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_add_wish"
         app:layout_constraintEnd_toEndOf="parent"
