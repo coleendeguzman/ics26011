@@ -1,9 +1,14 @@
 package com.example.wishlist
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Window
 import android.widget.Button
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wishlist.databinding.BirthdayPageBinding
 import com.example.wishlist.databinding.SchoolPageBinding
@@ -20,7 +25,10 @@ class BirthdayPage : AppCompatActivity() {
 
         db = DatabaseHandler(this)
 
-        wishAdapter = WishAdapter(db.getWishesByCategory("BIRTHDAY"), this)
+        wishAdapter = WishAdapter(db.getWishesByCategory("BIRTHDAY"), this) { wishId ->
+            // Delete action with confirmation
+            showDeleteConfirmationDialog(wishId)
+        }
         binding.BirthdayRecycler.layoutManager = LinearLayoutManager(this)
         binding.BirthdayRecycler.adapter = wishAdapter
 
@@ -36,6 +44,30 @@ class BirthdayPage : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         wishAdapter.refreshData(db.getWishesByCategory("BIRTHDAY"))
+    }
+
+    private fun showDeleteConfirmationDialog(wishId: Int) {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.delete_dialog)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        dialog.findViewById<Button>(R.id.btnYes).setOnClickListener {
+            dialog.dismiss()
+            val deletedRows = db.deleteWishById(wishId)
+            if (deletedRows > 0) {
+                Toast.makeText(this, "Wish successfully deleted.", Toast.LENGTH_LONG).show()
+                wishAdapter.refreshData(db.getWishesByCategory("BIRTHDAY"))
+            } else {
+                Toast.makeText(this, "Delete failed. Try again.", Toast.LENGTH_LONG).show()
+            }
+        }
+
+        dialog.findViewById<Button>(R.id.btnNo).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 }
 
