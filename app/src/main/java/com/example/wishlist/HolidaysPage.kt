@@ -27,6 +27,8 @@ class HolidaysPage : AppCompatActivity() {
 
         btnAddWish.setOnClickListener {
             val i = Intent(this, AddWishPage::class.java)
+            val username = intent.getStringExtra("USERNAME")?.uppercase()
+            i.putExtra("USERNAME", username) // Pass the username to AddWishActivity
             startActivity(i)
         }
     }

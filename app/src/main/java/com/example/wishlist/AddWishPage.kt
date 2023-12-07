@@ -81,7 +81,11 @@ class AddWishPage : AppCompatActivity() {
 
             if (wishSuccess != -1L) {
                 showToast("Entry successful!")
-                navigateToHomePage()
+                val i = Intent(this, HomePage::class.java)
+                val username = intent.getStringExtra("USERNAME")
+                i.putExtra("USERNAME", username)
+                startActivity(i)
+
             } else {
                 showToast("Entry Failed. Please try again.")
             }
