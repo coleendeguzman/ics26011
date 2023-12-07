@@ -34,11 +34,9 @@ class LoginPage : AppCompatActivity() {
 
                     if (user != null) {
                         Toast.makeText(this, "Login Successful", Toast.LENGTH_LONG).show()
-
                         val i = Intent(this, HomePage::class.java)
                         i.putExtra("USERNAME", username)
                         startActivity(i)
-
                         etUsername.text.clear()
                         etPassword.text.clear()
                     }
