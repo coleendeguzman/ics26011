@@ -60,7 +60,8 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         val CREATE_WISHES_TABLE =
             ("CREATE TABLE $TABLE_WISHES (" + "$KEY_WISH_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "$KEY_WISH_NAME TEXT," + "$KEY_WISH_DESCRIPTION TEXT," + "$KEY_WISH_LINK TEXT," + "$KEY_WISH_CATEGORY TEXT)")
+                    "$KEY_WISH_NAME TEXT," + "$KEY_WISH_DESCRIPTION TEXT," + "$KEY_WISH_LINK TEXT,"
+                    + "$KEY_WISH_CATEGORY TEXT)")
 
         db?.execSQL(CREATE_WISHES_TABLE)
     }

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,7 +34,8 @@ class SchoolPage : AppCompatActivity() {
         binding.SchoolRecycler.layoutManager = LinearLayoutManager(this)
         binding.SchoolRecycler.adapter = wishAdapter
 
-        val btnAddWish = findViewById<TextView>(R.id.btn_add_wish)
+        val btnAddWish = findViewById<ImageView>(R.id.add)
+        val btnBack = findViewById<ImageView>(R.id.back)
 
         btnAddWish.setOnClickListener {
             val i = Intent(this, AddWishPage::class.java)
@@ -41,8 +43,15 @@ class SchoolPage : AppCompatActivity() {
             i.putExtra("USERNAME", username) // Pass the username to AddWishActivity
             startActivity(i)
         }
+
+        btnBack.setOnClickListener {
+            onBackPressed()
+        }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
     override fun onResume() {
         super.onResume()
         wishAdapter.refreshData(db.getWishesByCategory("SCHOOL"))

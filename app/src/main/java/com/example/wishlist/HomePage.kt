@@ -50,9 +50,10 @@ class HomePage : AppCompatActivity() {
         }
 
         btnLogout.setOnClickListener {
-            val i = Intent(this, SchoolPage::class.java)
-            i.putExtra("USERNAME", username) // Pass the username to AddWishActivity
-            startActivity(i)
+            val intent = Intent(this, LoginPage::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            finish()
         }
 
 

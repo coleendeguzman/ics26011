@@ -16,11 +16,18 @@
         tools:layout_editor_absoluteY="-298dp">
 
         <ImageView
+            android:id="@+id/back"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            app:srcCompat="@drawable/backschool" />
+
+        <ImageView
             android:id="@+id/imageView"
             android:layout_width="146dp"
             android:layout_height="137dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
             android:paddingBottom="10dp"
             android:src="@drawable/logo"/>
 
@@ -32,7 +39,7 @@
             android:fontFamily="@font/anton"
             android:letterSpacing="0.044"
             android:text="WISH NAME"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:textColor="#000000"
             android:textSize="16sp"
             app:layout_constraintVertical_bias="0.266" />
@@ -158,21 +165,13 @@
             android:inputType="textMultiLine"
             android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/btn_add_wish"
-            style="@style/Widget.Material3.Button.TextButton"
-            android:layout_width="136dp"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/add"
+            android:layout_width="121dp"
+            android:layout_height="45dp"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:fontFamily="@font/anton"
-            android:shadowColor="#000000"
-            android:shadowDx="4"
-            android:shadowDy="1"
-            android:shadowRadius="1"
-            android:text="ADD WISH"
-            android:textColor="#153BD3"
-            android:textSize="24sp" />
+            android:layout_marginTop="75dp"
+            android:background="@drawable/confirm_add" />
 
     </LinearLayout>
 
