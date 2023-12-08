@@ -61,7 +61,7 @@
             android:layout_weight="1"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/dm_sans"
-            android:maxLines="3"
+            android:maxLines="5"
             android:text="Time’s up! Give me your wishlist"
             android:textSize="15dp"
             android:textStyle="bold" />

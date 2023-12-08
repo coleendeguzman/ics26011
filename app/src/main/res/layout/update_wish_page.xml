@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F369C3"
+    android:background="#2196F3"
     tools:context=".UpdateWish">
 
     <LinearLayout
@@ -29,32 +29,32 @@
             android:layout_height="137dp"
             android:layout_gravity="center"
             android:paddingBottom="10dp"
-            android:src="@drawable/logo"/>
+            android:src="@drawable/logo" />
 
         <TextView
             android:id="@+id/etWishName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/anton"
             android:letterSpacing="0.044"
             android:text="WISH NAME"
-            android:layout_marginTop="20dp"
             android:textColor="#000000"
             android:textSize="16sp"
             app:layout_constraintVertical_bias="0.266" />
 
         <EditText
-            android:id="@+id/et_update_wish_name"
+            android:id="@+id/updateName"
             android:layout_width="320dp"
             android:layout_height="38dp"
-            android:paddingLeft="4dp"
             android:layout_marginLeft="15dp"
             android:background="@drawable/my_border"
             android:ems="10"
             android:fontFamily="@font/anton"
             android:inputType="text"
             android:letterSpacing="0.05"
+            android:paddingLeft="4dp"
             android:textSize="16sp" />
 
         <TextView
@@ -70,16 +70,16 @@
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/et_update_wish_link"
+            android:id="@+id/updateLink"
             android:layout_width="320dp"
             android:layout_height="38dp"
-            android:paddingLeft="4dp"
             android:layout_marginLeft="15dp"
             android:background="@drawable/my_border"
             android:ems="10"
             android:fontFamily="@font/anton"
             android:inputType="text"
             android:letterSpacing="0.05"
+            android:paddingLeft="4dp"
             android:textSize="16sp" />
 
         <TextView
@@ -95,10 +95,10 @@
             android:textSize="16sp" />
 
         <RadioGroup
+            android:id="@+id/rgUpdateCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/rg_update_category">
+            android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/rb_school"
@@ -152,17 +152,17 @@
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/et_update_wish_description"
+            android:id="@+id/updateDesc"
             android:layout_width="320dp"
             android:layout_height="111dp"
             android:layout_marginLeft="15dp"
-            android:fontFamily="@font/anton"
-            android:paddingLeft="4dp"
             android:layout_marginTop="2dp"
             android:background="@drawable/dashed_border"
             android:ems="10"
+            android:fontFamily="@font/anton"
             android:gravity="start|top"
             android:inputType="textMultiLine"
+            android:paddingLeft="4dp"
             android:textSize="16sp" />
 
         <ImageView
@@ -170,7 +170,7 @@
             android:layout_width="121dp"
             android:layout_height="45dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="50dp"
             android:background="@drawable/confirm_add" />
 
     </LinearLayout>

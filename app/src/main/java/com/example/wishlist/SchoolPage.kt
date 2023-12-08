@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wishlist.databinding.SchoolPageBinding
 
 class SchoolPage : AppCompatActivity() {
-
     private lateinit var binding: SchoolPageBinding
     private lateinit var db: DatabaseHandler
     private lateinit var wishAdapter: WishAdapter
@@ -51,6 +50,7 @@ class SchoolPage : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
     }
+
     override fun onResume() {
         super.onResume()
         wishAdapter.refreshData(db.getWishesByCategory("SCHOOL"))
@@ -80,3 +80,4 @@ class SchoolPage : AppCompatActivity() {
         dialog.show()
     }
 }
+

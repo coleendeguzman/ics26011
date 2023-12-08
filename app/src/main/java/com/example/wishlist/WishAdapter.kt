@@ -19,7 +19,7 @@ class WishAdapter(private var wishes: List<Wishes>,
         val linkTextView: TextView = itemView.findViewById(R.id.wishLink)
         val descTextView: TextView = itemView.findViewById(R.id.wishDesc)
         val deleteImageView: ImageView = itemView.findViewById(R.id.delete)
-        val updateWish: ImageView = itemView.findViewById(R.id.update)
+        val updateWish: ImageView = itemView.findViewById(R.id.edit)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WishViewHolder {
@@ -39,11 +39,12 @@ class WishAdapter(private var wishes: List<Wishes>,
             val wishId = wishes[position].id
             deleteListener.invoke(wishId) // Call the deleteListener with wish ID
         }
+
         holder.updateWish.setOnClickListener {
-            val intent = Intent(holder.itemView.context, UpdateWish::class.java).apply {
+            val i = Intent(holder.itemView.context, UpdateWish::class.java).apply {
                 putExtra("wish_id", wish.id)
             }
-            holder.itemView.context.startActivity(intent)
+            holder.itemView.context.startActivity(i)
         }
     }
 

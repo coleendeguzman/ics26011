@@ -46,7 +46,7 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
 
         db?.execSQL(CREATE_USERS_TABLE)
 
-        val CREATE_WISHES_TABLE = ("CREATE TABLE $TABLE_WISHES (" +
+        val CREATE_WISHES_TABLE = ("CREATE TABLE IF NOT EXISTS $TABLE_WISHES (" +
                 "$KEY_WISH_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "$KEY_WISH_NAME TEXT," +
                 "$KEY_WISH_DESCRIPTION TEXT," +
@@ -55,18 +55,40 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
 
         db?.execSQL(CREATE_WISHES_TABLE)
     }
-
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        val CREATE_WISHES_TABLE = ("CREATE TABLE $TABLE_WISHES (" +
-                "$KEY_WISH_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "$KEY_WISH_NAME TEXT," +
-                "$KEY_WISH_DESCRIPTION TEXT," +
-                "$KEY_WISH_LINK TEXT," +
-                "$KEY_WISH_CATEGORY TEXT)")
+        if (oldVersion < newVersion) {
+            // Check if the TABLE_WISHES exists before altering it
+            val wishesTableExistenceQuery = "SELECT DISTINCT tbl_name FROM sqlite_master WHERE tbl_name = '$TABLE_WISHES'"
+            val cursor: Cursor = db?.rawQuery(wishesTableExistenceQuery, null) ?: return
+            val tableExists = cursor.count > 0
+            cursor.close()
 
-        db?.execSQL(CREATE_WISHES_TABLE)
+            if (!tableExists) {
+                val CREATE_WISHES_TABLE = ("CREATE TABLE $TABLE_WISHES (" +
+                        "$KEY_WISH_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "$KEY_WISH_NAME TEXT," +
+                        "$KEY_WISH_DESCRIPTION TEXT," +
+                        "$KEY_WISH_LINK TEXT," +
+                        "$KEY_WISH_CATEGORY TEXT)")
+
+                db?.execSQL(CREATE_WISHES_TABLE)
+            }
+        }
     }
+
+
+//  override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+//        val CREATE_WISHES_TABLE = ("CREATE TABLE $TABLE_WISHES (" +
+//                "$KEY_WISH_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+//                "$KEY_WISH_NAME TEXT," +
+//                "$KEY_WISH_DESCRIPTION TEXT," +
+//                "$KEY_WISH_LINK TEXT," +
+//                "$KEY_WISH_CATEGORY TEXT)")
+//
+//        db?.execSQL(CREATE_WISHES_TABLE)
+//    }
+
 
     fun createWish(
         wishname: String,
@@ -153,7 +175,7 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
             val link = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_LINK))
             val cat = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_CATEGORY))
 
-            val wish = Wishes(id, name, desc, link, cat)
+            val wish = Wishes(id, name, link, desc, cat)
             wishList.add(wish)
         }
         cursor.close()
@@ -175,7 +197,7 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
             val link = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_LINK))
             val cat = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_CATEGORY))
 
-            val wish = Wishes(id, name, desc, link, cat)
+            val wish = Wishes(id, name, link, desc, cat)
             wishList.add(wish)
         }
         cursor.close()
@@ -190,19 +212,21 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
         return success
     }
 
-    fun updateWish(wish: Wishes){
+    fun updateWish(id: Int, newName: String, newLink: String, newDesc: String, newCategory: String): Int {
         val db = this.writableDatabase
         val values = ContentValues().apply {
-            put(KEY_WISH_NAME, wish.wishname)
-            put(KEY_WISH_DESCRIPTION, wish.wishdesc)
-            put(KEY_WISH_LINK, wish.wishlink)
+            put(KEY_WISH_NAME, newName)
+            put(KEY_WISH_LINK, newLink)
+            put(KEY_WISH_DESCRIPTION, newDesc)
+            put(KEY_WISH_CATEGORY, newCategory)
         }
         val whereClause = "$KEY_WISH_ID = ?"
-        val whereArgs = arrayOf(wish.id.toString())
-        db.update(TABLE_WISHES, values, whereClause, whereArgs)
-        db.close()
-    }
+        val whereArgs = arrayOf(id.toString())
 
+        val success = db.update(TABLE_WISHES, values, whereClause, whereArgs)
+        db.close()
+        return success
+    }
     fun getWishByID(wishId: Int): Wishes{
         val db = this.readableDatabase
         val query = "SELECT * FROM $TABLE_WISHES WHERE $KEY_WISH_ID = $wishId"
@@ -211,13 +235,13 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
 
         val id = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_WISH_ID))
         val name = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_NAME))
-        val desc = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_DESCRIPTION))
         val link = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_LINK))
+        val desc = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_DESCRIPTION))
         val cat = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_CATEGORY))
 
         cursor.close()
         db.close()
-        return Wishes(id, name, desc, link, desc)
+        return Wishes(id, name, link, desc, cat)
     }
 }
 

@@ -26,7 +26,6 @@ class HolidaysPage : AppCompatActivity() {
         db = DatabaseHandler(this)
 
         wishAdapter = WishAdapter(db.getWishesByCategory("HOLIDAYS"), this) { wishId ->
-            // Delete action with confirmation
             showDeleteConfirmationDialog(wishId)
         }
         binding.HolidaysRecycler.layoutManager = LinearLayoutManager(this)
