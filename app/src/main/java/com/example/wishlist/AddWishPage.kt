@@ -34,7 +34,7 @@ class AddWishPage : AppCompatActivity() {
         etWishLink = findViewById(R.id.et_wish_link)
         radioGroup = findViewById(R.id.rg_category)
 
-        val btnAddWish = findViewById<ImageView>(R.id.add)
+        val btnAddWish = findViewById<ImageView>(R.id.edit)
         val btnBack = findViewById<ImageView>(R.id.back)
 
         btnAddWish.setOnClickListener {

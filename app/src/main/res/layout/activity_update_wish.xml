@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F369C3"
-    tools:context=".AddWishPage">
+    tools:context=".UpdateWish">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +45,7 @@
             app:layout_constraintVertical_bias="0.266" />
 
         <EditText
-            android:id="@+id/et_wish_name"
+            android:id="@+id/et_update_wish_name"
             android:layout_width="320dp"
             android:layout_height="38dp"
             android:paddingLeft="4dp"
@@ -70,7 +70,7 @@
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/et_wish_link"
+            android:id="@+id/et_update_wish_link"
             android:layout_width="320dp"
             android:layout_height="38dp"
             android:paddingLeft="4dp"
@@ -98,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/rg_category">
+            android:id="@+id/rg_update_category">
 
             <RadioButton
                 android:id="@+id/rb_school"
@@ -152,7 +152,7 @@
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/et_wish_description"
+            android:id="@+id/et_update_wish_description"
             android:layout_width="320dp"
             android:layout_height="111dp"
             android:layout_marginLeft="15dp"
@@ -166,7 +166,7 @@
             android:textSize="16sp" />
 
         <ImageView
-            android:id="@+id/edit"
+            android:id="@+id/update"
             android:layout_width="121dp"
             android:layout_height="45dp"
             android:layout_gravity="center"

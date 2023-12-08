@@ -1,6 +1,7 @@
 package com.example.wishlist
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ class WishAdapter(private var wishes: List<Wishes>,
         val linkTextView: TextView = itemView.findViewById(R.id.wishLink)
         val descTextView: TextView = itemView.findViewById(R.id.wishDesc)
         val deleteImageView: ImageView = itemView.findViewById(R.id.delete)
+        val updateWish: ImageView = itemView.findViewById(R.id.update)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WishViewHolder {
@@ -36,6 +38,12 @@ class WishAdapter(private var wishes: List<Wishes>,
         holder.deleteImageView.setOnClickListener {
             val wishId = wishes[position].id
             deleteListener.invoke(wishId) // Call the deleteListener with wish ID
+        }
+        holder.updateWish.setOnClickListener {
+            val intent = Intent(holder.itemView.context, UpdateWish::class.java).apply {
+                putExtra("wish_id", wish.id)
+            }
+            holder.itemView.context.startActivity(intent)
         }
     }
 

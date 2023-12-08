@@ -22,7 +22,7 @@ data class Wishes(
 class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
-        private const val DATABASE_VERSION = 6
+        private const val DATABASE_VERSION = 8
         private const val DATABASE_NAME = "UserDatabase.db"
 
         private const val TABLE_USERS = "users"
@@ -58,10 +58,12 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
 
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        val CREATE_WISHES_TABLE =
-            ("CREATE TABLE $TABLE_WISHES (" + "$KEY_WISH_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "$KEY_WISH_NAME TEXT," + "$KEY_WISH_DESCRIPTION TEXT," + "$KEY_WISH_LINK TEXT,"
-                    + "$KEY_WISH_CATEGORY TEXT)")
+        val CREATE_WISHES_TABLE = ("CREATE TABLE $TABLE_WISHES (" +
+                "$KEY_WISH_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "$KEY_WISH_NAME TEXT," +
+                "$KEY_WISH_DESCRIPTION TEXT," +
+                "$KEY_WISH_LINK TEXT," +
+                "$KEY_WISH_CATEGORY TEXT)")
 
         db?.execSQL(CREATE_WISHES_TABLE)
     }
@@ -186,6 +188,36 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
         val success = db.delete(TABLE_WISHES, "$KEY_WISH_ID=?", arrayOf(id.toString()))
         db.close()
         return success
+    }
+
+    fun updateWish(wish: Wishes){
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(KEY_WISH_NAME, wish.wishname)
+            put(KEY_WISH_DESCRIPTION, wish.wishdesc)
+            put(KEY_WISH_LINK, wish.wishlink)
+        }
+        val whereClause = "$KEY_WISH_ID = ?"
+        val whereArgs = arrayOf(wish.id.toString())
+        db.update(TABLE_WISHES, values, whereClause, whereArgs)
+        db.close()
+    }
+
+    fun getWishByID(wishId: Int): Wishes{
+        val db = this.readableDatabase
+        val query = "SELECT * FROM $TABLE_WISHES WHERE $KEY_WISH_ID = $wishId"
+        val cursor = db.rawQuery(query, null)
+        cursor.moveToFirst()
+
+        val id = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_WISH_ID))
+        val name = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_NAME))
+        val desc = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_DESCRIPTION))
+        val link = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_LINK))
+        val cat = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_CATEGORY))
+
+        cursor.close()
+        db.close()
+        return Wishes(id, name, desc, link, desc)
     }
 }
 

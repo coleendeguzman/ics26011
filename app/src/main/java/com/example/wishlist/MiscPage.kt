@@ -11,7 +11,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.wishlist.databinding.HolidaysPageBinding
 import com.example.wishlist.databinding.MiscPageBinding
 
 class MiscPage : AppCompatActivity() {

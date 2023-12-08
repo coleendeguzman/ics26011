@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Wishlist"
         tools:targetApi="31">
         <activity
-            android:name=".WishList"
+            android:name=".UpdateWish"
             android:exported="false" />
         <activity
             android:name=".SplashScreen"
@@ -24,9 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ListAdapter"
-            android:exported="false" />
         <activity
             android:name=".AddWishPage"
             android:exported="false" />

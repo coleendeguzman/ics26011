@@ -12,7 +12,6 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wishlist.databinding.BirthdayPageBinding
-import com.example.wishlist.databinding.SchoolPageBinding
 
 class BirthdayPage : AppCompatActivity() {
     private lateinit var binding: BirthdayPageBinding
