@@ -170,7 +170,7 @@
             android:layout_width="121dp"
             android:layout_height="45dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="35dp"
             android:background="@drawable/confirm_add" />
 
     </LinearLayout>
