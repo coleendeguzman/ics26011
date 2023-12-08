@@ -6,9 +6,11 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.Window
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
@@ -18,7 +20,6 @@ class AddWishPage : AppCompatActivity() {
     private lateinit var etWishName: EditText
     private lateinit var etWishDesc: EditText
     private lateinit var etWishLink: EditText
-    private lateinit var etImageUrl: EditText
     private lateinit var radioGroup: RadioGroup
     private lateinit var dbHandler: DatabaseHandler
 
@@ -31,30 +32,54 @@ class AddWishPage : AppCompatActivity() {
         etWishName = findViewById(R.id.et_wish_name)
         etWishDesc = findViewById(R.id.et_wish_description)
         etWishLink = findViewById(R.id.et_wish_link)
-        etImageUrl = findViewById(R.id.et_image_url)
         radioGroup = findViewById(R.id.rg_category)
 
-        val btnAddWish = findViewById<Button>(R.id.btn_add_wish)
+        val btnAddWish = findViewById<ImageView>(R.id.add)
+        val btnBack = findViewById<ImageView>(R.id.back)
 
         btnAddWish.setOnClickListener {
             addWish()
         }
+        btnBack.setOnClickListener {
+            onBackPressed()
+        }
+    }
+
+    override fun onBackPressed() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.cancel_dialog)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.setOnKeyListener { _, keyCode, _ ->
+            keyCode == KeyEvent.KEYCODE_BACK
+        }
+
+        val btnCancel = dialog.findViewById<Button>(R.id.btnNo)
+        val btnConfirm = dialog.findViewById<Button>(R.id.btnYes)
+
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        btnConfirm.setOnClickListener {
+            dialog.dismiss()
+            super.onBackPressed() // Go back only if confirmed
+        }
+
+        dialog.show()
     }
 
     private fun addWish() {
         val wishname = etWishName.text.toString()
         val wishdesc = etWishDesc.text.toString()
         val wishlink = etWishLink.text.toString()
-        val imageurl = etImageUrl.text.toString()
-
         val checkedRadioButtonId = radioGroup.checkedRadioButtonId
-
         if (checkedRadioButtonId != -1) {
             val checkedRadioButton = findViewById<RadioButton>(checkedRadioButtonId)
             val selectedCategory = checkedRadioButton.text.toString()
-
             if (wishname.trim().isNotEmpty() && wishlink.trim().isNotEmpty() && wishdesc.trim().isNotEmpty()) {
-                showConfirmationDialog(wishname, wishlink, wishdesc, imageurl, selectedCategory)
+                showConfirmationDialog(wishname, wishlink, wishdesc, selectedCategory)
             } else {
                 showToast("Required Fields left Empty. Please try again.")
             }
@@ -67,17 +92,15 @@ class AddWishPage : AppCompatActivity() {
         wishname: String,
         wishlink: String,
         wishdesc: String,
-        imageurl: String,
         selectedCategory: String
     ) {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.add_dialog)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
         dialog.findViewById<Button>(R.id.btnYes).setOnClickListener {
             dialog.dismiss()
-            val wishSuccess = dbHandler.createWish(wishname, wishlink, wishdesc, imageurl, selectedCategory)
+            val wishSuccess = dbHandler.createWish(wishname, wishlink, wishdesc, selectedCategory)
 
             if (wishSuccess != -1L) {
                 showToast("Entry successful!")
@@ -90,18 +113,14 @@ class AddWishPage : AppCompatActivity() {
                 showToast("Entry Failed. Please try again.")
             }
         }
-
         dialog.findViewById<Button>(R.id.btnNo).setOnClickListener {
             dialog.dismiss()
         }
-
         dialog.show()
     }
-
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
-
     private fun navigateToHomePage() {
         val intent = Intent(this, HomePage::class.java)
         startActivity(intent)

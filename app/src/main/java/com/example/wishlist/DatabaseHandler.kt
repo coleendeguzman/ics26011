@@ -17,7 +17,6 @@ data class Wishes(
     val wishname: String,
     val wishlink: String,
     val wishdesc: String,
-    val imageurl: String,
     val category: String
 )
 class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_NAME, null, DATABASE_VERSION) {
@@ -35,7 +34,6 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
         private const val KEY_WISH_NAME = "wishname"
         private const val KEY_WISH_DESCRIPTION = "description"
         private const val KEY_WISH_LINK = "link"
-        private const val KEY_WISH_IMAGE = "imagelink"
         private const val KEY_WISH_CATEGORY = "category"
 
     }
@@ -53,7 +51,6 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
                 "$KEY_WISH_NAME TEXT," +
                 "$KEY_WISH_DESCRIPTION TEXT," +
                 "$KEY_WISH_LINK TEXT," +
-                "$KEY_WISH_IMAGE TEXT," +
                 "$KEY_WISH_CATEGORY TEXT)")
 
         db?.execSQL(CREATE_WISHES_TABLE)
@@ -63,7 +60,8 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         val CREATE_WISHES_TABLE =
             ("CREATE TABLE $TABLE_WISHES (" + "$KEY_WISH_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "$KEY_WISH_NAME TEXT," + "$KEY_WISH_DESCRIPTION TEXT," + "$KEY_WISH_LINK TEXT," + "$KEY_WISH_IMAGE TEXT," + "$KEY_WISH_CATEGORY TEXT)")
+                    "$KEY_WISH_NAME TEXT," + "$KEY_WISH_DESCRIPTION TEXT," + "$KEY_WISH_LINK TEXT,"
+                    + "$KEY_WISH_CATEGORY TEXT)")
 
         db?.execSQL(CREATE_WISHES_TABLE)
     }
@@ -72,7 +70,6 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
         wishname: String,
         wishdesc: String,
         wishlink: String,
-        imageurl: String,
         category: String
     ): Long {
         val db = this.writableDatabase
@@ -80,7 +77,6 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
             put(KEY_WISH_NAME, wishname)
             put(KEY_WISH_DESCRIPTION, wishdesc)
             put(KEY_WISH_LINK, wishlink)
-            put(KEY_WISH_IMAGE, imageurl)
             put(KEY_WISH_CATEGORY, category)
         }
 
@@ -153,10 +149,9 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
             val name = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_NAME))
             val desc = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_DESCRIPTION))
             val link = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_LINK))
-            val imglink = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_IMAGE))
             val cat = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_CATEGORY))
 
-            val wish = Wishes(id, name, desc, link, imglink, cat)
+            val wish = Wishes(id, name, desc, link, cat)
             wishList.add(wish)
         }
         cursor.close()
@@ -176,10 +171,9 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
             val name = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_NAME))
             val desc = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_DESCRIPTION))
             val link = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_LINK))
-            val imglink = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_IMAGE))
             val cat = cursor.getString(cursor.getColumnIndexOrThrow(KEY_WISH_CATEGORY))
 
-            val wish = Wishes(id, name, desc, link, imglink, cat)
+            val wish = Wishes(id, name, desc, link, cat)
             wishList.add(wish)
         }
         cursor.close()

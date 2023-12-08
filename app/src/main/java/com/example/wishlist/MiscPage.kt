@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wishlist.databinding.HolidaysPageBinding
@@ -32,13 +33,23 @@ class MiscPage : AppCompatActivity() {
         binding.MiscRecycler.layoutManager = LinearLayoutManager(this)
         binding.MiscRecycler.adapter = wishAdapter
 
-        val btnAddWish = findViewById<Button>(R.id.btn_add_wish)
+        val btnAddWish = findViewById<ImageView>(R.id.add)
+        val btnBack = findViewById<ImageView>(R.id.back)
+
         btnAddWish.setOnClickListener {
             val i = Intent(this, AddWishPage::class.java)
             val username = intent.getStringExtra("USERNAME")?.uppercase()
             i.putExtra("USERNAME", username) // Pass the username to AddWishActivity
             startActivity(i)
         }
+
+        btnBack.setOnClickListener {
+            onBackPressed()
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 
     override fun onResume() {

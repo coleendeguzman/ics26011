@@ -1,5 +1,6 @@
 package com.example.wishlist
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -33,6 +34,12 @@ class LoginPage : AppCompatActivity() {
                     val user = dbHandler.getUserInfo(username)
 
                     if (user != null) {
+                        // Store username in shared preferences
+                        val sharedPref = getSharedPreferences("USER_PREFERENCES", Context.MODE_PRIVATE)
+                        val editor = sharedPref.edit()
+                        editor.putString("USERNAME", username)
+                        editor.apply()
+
                         Toast.makeText(this, "Login Successful", Toast.LENGTH_LONG).show()
                         val i = Intent(this, HomePage::class.java)
                         i.putExtra("USERNAME", username)
