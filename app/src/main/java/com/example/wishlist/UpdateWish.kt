@@ -52,7 +52,6 @@ class UpdateWish : AppCompatActivity() {
         binding.updateName.text.clear()
         binding.updateLink.text.clear()
         binding.updateDesc.text.clear()
-        // Clear the selected radio button in the RadioGroup if needed
         binding.rgUpdateCategory.clearCheck()
     }
 
@@ -121,6 +120,7 @@ class UpdateWish : AppCompatActivity() {
 
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.update_dialog)
         dialog.setContentView(R.layout.update_dialog)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 

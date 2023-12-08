@@ -30,8 +30,8 @@ class AddWishPage : AppCompatActivity() {
         dbHandler = DatabaseHandler(this)
 
         etWishName = findViewById(R.id.et_wish_name)
-        etWishDesc = findViewById(R.id.et_wish_description)
         etWishLink = findViewById(R.id.et_wish_link)
+        etWishDesc = findViewById(R.id.et_wish_description)
         radioGroup = findViewById(R.id.rg_category)
 
         val btnAddWish = findViewById<ImageView>(R.id.edit)
@@ -72,8 +72,9 @@ class AddWishPage : AppCompatActivity() {
 
     private fun addWish() {
         val wishname = etWishName.text.toString()
-        val wishdesc = etWishDesc.text.toString()
         val wishlink = etWishLink.text.toString()
+        val wishdesc = etWishDesc.text.toString()
+
         val checkedRadioButtonId = radioGroup.checkedRadioButtonId
         if (checkedRadioButtonId != -1) {
             val checkedRadioButton = findViewById<RadioButton>(checkedRadioButtonId)
@@ -98,6 +99,7 @@ class AddWishPage : AppCompatActivity() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.add_dialog)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
         dialog.findViewById<Button>(R.id.btnYes).setOnClickListener {
             dialog.dismiss()
             val wishSuccess = dbHandler.createWish(wishname, wishlink, wishdesc, selectedCategory)
