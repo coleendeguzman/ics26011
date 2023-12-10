@@ -52,9 +52,9 @@
             android:layout_marginLeft="15dp"
             android:background="@drawable/my_border"
             android:ems="10"
-            android:fontFamily="@font/dm_sans"
+            android:fontFamily="@font/anton"
             android:inputType="text"
-            android:letterSpacing="0.05"
+            android:letterSpacing="0.06"
             android:textSize="16sp" />
 
         <TextView
@@ -77,9 +77,9 @@
             android:layout_marginLeft="15dp"
             android:background="@drawable/my_border"
             android:ems="10"
-            android:fontFamily="@font/dm_sans"
+            android:fontFamily="@font/anton"
             android:inputType="text"
-            android:letterSpacing="0.05"
+            android:letterSpacing="0.06"
             android:textSize="16sp" />
 
         <TextView
@@ -159,10 +159,11 @@
             android:layout_marginTop="2dp"
             android:background="@drawable/dashed_border"
             android:ems="10"
-            android:fontFamily="@font/dm_sans"
+            android:fontFamily="@font/anton"
             android:gravity="start|top"
             android:inputType="textMultiLine"
             android:paddingLeft="4dp"
+            android:letterSpacing="0.06"
             android:textSize="16sp" />
 
         <ImageView
