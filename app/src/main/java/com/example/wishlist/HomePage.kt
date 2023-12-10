@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.Window
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 
 class HomePage : AppCompatActivity() {
@@ -18,7 +19,8 @@ class HomePage : AppCompatActivity() {
 
         val username = intent.getStringExtra("USERNAME")?.uppercase()
 
-        val btnLogout = findViewById<Button>(R.id.btnLogout)
+        val btnLogout = findViewById<TextView>(R.id.btnLogout)
+        val btnAdd = findViewById<ImageView>(R.id.add)
         val tvUsername = findViewById<TextView>(R.id.tvUsername)
 
         val btnSchool = findViewById<ImageButton>(R.id.btnSchool)
@@ -27,7 +29,6 @@ class HomePage : AppCompatActivity() {
         val btnMisc = findViewById<ImageButton>(R.id.btnMisc)
 
         tvUsername.text = username
-
 
         btnSchool.setOnClickListener {
             val i = Intent(this, SchoolPage::class.java)
@@ -52,6 +53,11 @@ class HomePage : AppCompatActivity() {
             i.putExtra("USERNAME", username) // Pass the username to AddWishActivity
             startActivity(i)
         }
+
+        btnAdd.setOnClickListener{
+            val i = Intent (this, AddWishPage::class.java)
+            i.putExtra("USERNAME", username) // Pass the username to AddWishActivity
+            startActivity(i)        }
 
         btnLogout.setOnClickListener {
             val dialog = Dialog(this)

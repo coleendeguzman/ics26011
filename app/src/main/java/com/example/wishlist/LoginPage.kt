@@ -3,8 +3,12 @@ package com.example.wishlist
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +23,22 @@ class LoginPage : AppCompatActivity() {
 
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         val tvRegister = findViewById<TextView>(R.id.tvSignUp)
+
+        val etPassword = findViewById<EditText>(R.id.etPassword)
+        val btnTogglePassword = findViewById<ImageView>(R.id.btnTogglePassword)
+
+        etPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
+
+        btnTogglePassword.setOnClickListener {
+            if (etPassword.transformationMethod == PasswordTransformationMethod.getInstance()) {
+                etPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                btnTogglePassword.setImageResource(R.drawable.show)
+            } else {
+                etPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+                btnTogglePassword.setImageResource(R.drawable.hide)
+            }
+            etPassword.setSelection(etPassword.text.length)
+        }
 
         btnLogin.setOnClickListener {
             val etUsername = findViewById<EditText>(R.id.etUsername)

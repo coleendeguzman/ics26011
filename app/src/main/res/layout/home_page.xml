@@ -7,6 +7,7 @@
     android:background="#EAF404"
     tools:context=".HomePage">
 
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -18,15 +19,16 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.119"
+        app:layout_constraintHorizontal_bias="0.101"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.058" />
+        app:layout_constraintVertical_bias="0.059" />
 
     <TextView
         android:id="@+id/tvUsername"
         android:layout_width="325dp"
         android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
         android:background="@drawable/dashed_border"
         android:fontFamily="@font/anton"
         android:textAlignment="center"
@@ -34,15 +36,16 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.086"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099" />
-
+        app:layout_constraintVertical_bias="0.098" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="225dp"
         android:layout_height="77dp"
+        android:layout_marginLeft="30dp"
         android:fontFamily="@font/anton"
         android:letterSpacing="0.044"
         android:shadowColor="#000000"
@@ -50,27 +53,28 @@
         android:shadowDy="3"
         android:shadowRadius="4"
         android:text="WISHLIST:"
+        android:textAlignment="center"
         android:textColor="#F568C0"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.591"
+        app:layout_constraintHorizontal_bias="0.41"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.148" />
+        app:layout_constraintVertical_bias="0.159" />
 
     <ImageButton
-        android:id="@+id/btnBirthday"
-        android:layout_width="154dp"
-        android:layout_height="84dp"
-        android:layout_marginStart="4dp"
-        android:background="@drawable/birthday"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSchool"
-        app:layout_constraintVertical_bias="0.052" />
+            android:id="@+id/btnBirthday"
+            android:layout_width="154dp"
+            android:layout_height="84dp"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/birthday"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnSchool"
+            app:layout_constraintVertical_bias="0.052" />
 
     <ImageButton
         android:id="@+id/btnSchool"
@@ -80,40 +84,39 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.351" />
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintVertical_bias="0.054" />
 
     <ImageButton
-        android:id="@+id/btnHolidays"
-        android:layout_width="117dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="4dp"
-        android:background="@drawable/holidays"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBirthday"
-        app:layout_constraintVertical_bias="0.067" />
+            android:id="@+id/btnHolidays"
+            android:layout_width="117dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/holidays"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnBirthday"
+            app:layout_constraintVertical_bias="0.067" />
 
-    <ImageButton
-        android:id="@+id/btnMisc"
-        android:layout_width="142dp"
-        android:layout_height="81dp"
-        android:layout_marginStart="4dp"
-        android:background="@drawable/misc"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnHolidays"
-        app:layout_constraintVertical_bias="0.115" />
+        <ImageButton
+            android:id="@+id/btnMisc"
+            android:layout_width="142dp"
+            android:layout_height="81dp"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/misc"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnHolidays"
+            app:layout_constraintVertical_bias="0.115" />
 
-    <Button
+    <TextView
         android:id="@+id/btnLogout"
-        style="@style/Widget.Material3.Button.TextButton"
-        android:layout_width="124dp"
-        android:layout_height="56dp"
+        android:layout_width="123dp"
+        android:layout_height="41dp"
         android:fontFamily="@font/anton"
         android:letterSpacing="0.044"
         android:text="@string/logout"
@@ -121,10 +124,24 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.096"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintVertical_bias="0.978" />
+
+    <ImageView
+        android:id="@+id/add"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.953"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.978"
+        app:srcCompat="@drawable/add" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

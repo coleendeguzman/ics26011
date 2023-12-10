@@ -63,27 +63,6 @@ class DatabaseHandler (private val context: Context) : SQLiteOpenHelper (context
         db?.execSQL(CREATE_WISHES_TABLE)
     }
 
- //   override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
- //       if (oldVersion < newVersion) {
- // Check if the TABLE_WISHES exists before altering it
-   //         val wishesTableExistenceQuery = "SELECT DISTINCT tbl_name FROM sqlite_master WHERE tbl_name = '$TABLE_WISHES'"
-   //         val cursor: Cursor = db?.rawQuery(wishesTableExistenceQuery, null) ?: return
-  //          val tableExists = cursor.count > 0
-  //          cursor.close()
-
-    //        if (!tableExists) {
-   //             val CREATE_WISHES_TABLE = ("CREATE TABLE IF NOT EXISTS $TABLE_WISHES (" +
-   //                     "$KEY_WISH_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-    //                    "$KEY_WISH_NAME TEXT," +
-    //                    "$KEY_WISH_LINK TEXT," +
-    //                    "$KEY_WISH_DESCRIPTION TEXT," +
-    //
-    //            db?.execSQL(CREATE_WISHES_TABLE)
-   //        }
-    //    }
-  //  }
-
-
 override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
        val CREATE_WISHES_TABLE = ("CREATE TABLE $TABLE_WISHES (" +
               "$KEY_WISH_ID INTEGER PRIMARY KEY AUTOINCREMENT," +

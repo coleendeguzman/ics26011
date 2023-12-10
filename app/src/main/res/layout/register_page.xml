@@ -172,6 +172,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.563" />
 
+    <ImageView
+        android:id="@+id/btnTogglePassword1"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/show"
+        app:layout_constraintBottom_toBottomOf="@id/etPassword"
+        app:layout_constraintEnd_toEndOf="@+id/etPassword"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/etPassword"
+        app:layout_constraintTop_toTopOf="@id/etPassword"
+        app:layout_constraintVertical_bias="0.0" />
+
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
@@ -206,22 +220,35 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.658" />
 
-    <Button
+    <ImageView
+        android:id="@+id/btnTogglePassword2"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/show"
+        app:layout_constraintBottom_toBottomOf="@id/etConfirmPassword"
+        app:layout_constraintEnd_toEndOf="@+id/etConfirmPassword"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/etConfirmPassword"
+        app:layout_constraintTop_toTopOf="@id/etConfirmPassword"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
         android:id="@+id/btnRegister"
-        style="@style/Widget.Material3.Button.TextButton"
-        android:layout_width="121dp"
-        android:layout_height="56dp"
+        android:layout_width="105dp"
+        android:layout_height="42dp"
         android:fontFamily="@font/anton"
         android:letterSpacing="0.044"
         android:text="@string/register"
+        android:textAlignment="center"
         android:textColor="#4835EE"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.73" />
+        app:layout_constraintVertical_bias="0.724" />
 
     <TextView
         android:id="@+id/textView7"
