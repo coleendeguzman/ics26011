@@ -2,6 +2,9 @@ package com.example.wishlist
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,9 +26,9 @@ class WishAdapter(private var wishes: List<Wishes>,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WishViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.recycler_custom, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.recycler_custom, parent, false)
         return WishViewHolder(view)
-
     }
 
     override fun getItemCount(): Int = wishes.size
@@ -33,8 +36,21 @@ class WishAdapter(private var wishes: List<Wishes>,
     override fun onBindViewHolder(holder: WishViewHolder, position: Int) {
         val wish = wishes[position]
         holder.titleTextView.text = wish.wishname
-        holder.linkTextView.text = wish.wishlink
         holder.descTextView.text = wish.wishdesc
+
+        // Make links clickable
+        holder.linkTextView.movementMethod = LinkMovementMethod.getInstance()
+        holder.linkTextView.text = wish.wishlink?.let { link ->
+            val spannableString = android.text.SpannableString(link)
+            val clickableSpan = object : ClickableSpan() {
+                override fun onClick(widget: View) {
+                    handleClickedLink(link, holder.itemView.context)
+                }
+            }
+            spannableString.setSpan(clickableSpan, 0, link.length, android.text.Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            spannableString
+        }
+
         holder.deleteImageView.setOnClickListener {
             val wishId = wishes[position].id
             deleteListener.invoke(wishId) // Call the deleteListener with wish ID
@@ -51,6 +67,12 @@ class WishAdapter(private var wishes: List<Wishes>,
     fun refreshData(newWishes: List<Wishes>) {
         wishes= newWishes
         notifyDataSetChanged()
+    }
+
+    private fun handleClickedLink(link: String, context: Context) {
+        // Handle the clicked link here
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+        context.startActivity(intent)
     }
 
 

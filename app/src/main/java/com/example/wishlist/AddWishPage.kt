@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.TextView
 import android.widget.Toast
 
 class AddWishPage : AppCompatActivity() {
@@ -34,8 +35,10 @@ class AddWishPage : AppCompatActivity() {
         etWishDesc = findViewById(R.id.et_wish_description)
         radioGroup = findViewById(R.id.rg_category)
 
+
         val btnAddWish = findViewById<ImageView>(R.id.edit)
         val btnBack = findViewById<ImageView>(R.id.back)
+        val btnClear = findViewById<TextView>(R.id.clear)
 
         btnAddWish.setOnClickListener {
             addWish()
@@ -43,6 +46,17 @@ class AddWishPage : AppCompatActivity() {
         btnBack.setOnClickListener {
             onBackPressed()
         }
+
+        btnClear.setOnClickListener {
+            clearFields()
+        }
+    }
+
+    private fun clearFields() {
+        etWishName.text.clear()
+        etWishLink.text.clear()
+        etWishDesc.text.clear()
+        radioGroup.clearCheck()
     }
 
     override fun onBackPressed() {

@@ -166,6 +166,18 @@
             android:letterSpacing="0.06"
             android:textSize="16sp" />
 
+        <TextView
+            android:id="@+id/clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="3dp"
+            android:fontFamily="@font/open_sans"
+            android:letterSpacing="0.044"
+            android:text="CLEAR ALL FIELDS"
+            android:textColor="#EAF404"
+            android:textSize="17sp" />
+
         <ImageView
             android:id="@+id/edit"
             android:layout_width="110dp"
@@ -175,6 +187,7 @@
             android:background="@drawable/confirm_add" />
 
     </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
