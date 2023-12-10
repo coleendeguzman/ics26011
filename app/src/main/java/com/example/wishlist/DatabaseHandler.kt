@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import java.lang.IllegalStateException
 
 
 data class User(
@@ -19,10 +20,10 @@ data class Wishes(
     val wishdesc: String,
     val category: String
 )
-class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_NAME, null, DATABASE_VERSION) {
+class DatabaseHandler (private val context: Context) : SQLiteOpenHelper (context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
-        private const val DATABASE_VERSION = 8
+        private const val DATABASE_VERSION = 10
         private const val DATABASE_NAME = "UserDatabase.db"
 
         private const val TABLE_USERS = "users"
@@ -35,6 +36,10 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
         private const val KEY_WISH_LINK = "link"
         private const val KEY_WISH_DESCRIPTION = "description"
         private const val KEY_WISH_CATEGORY = "category"
+        private const val KEY_WISH_USERNAME_FK = "user"
+
+        private const val PREFS_NAME = "MyPrefs"
+        private const val KEY_LOGGED_IN_USER = "loggedInUser"
 
     }
 
@@ -51,45 +56,57 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
                 "$KEY_WISH_NAME TEXT," +
                 "$KEY_WISH_LINK TEXT," +
                 "$KEY_WISH_DESCRIPTION TEXT," +
-                "$KEY_WISH_CATEGORY TEXT)")
+                "$KEY_WISH_CATEGORY TEXT," +
+                "$KEY_WISH_USERNAME_FK TEXT," +
+                "FOREIGN KEY($KEY_WISH_USERNAME_FK) REFERENCES $TABLE_USERS($KEY_USERNAME))")
 
         db?.execSQL(CREATE_WISHES_TABLE)
     }
 
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        if (oldVersion < newVersion) {
-            // Check if the TABLE_WISHES exists before altering it
-            val wishesTableExistenceQuery = "SELECT DISTINCT tbl_name FROM sqlite_master WHERE tbl_name = '$TABLE_WISHES'"
-            val cursor: Cursor = db?.rawQuery(wishesTableExistenceQuery, null) ?: return
-            val tableExists = cursor.count > 0
-            cursor.close()
+ //   override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+ //       if (oldVersion < newVersion) {
+ // Check if the TABLE_WISHES exists before altering it
+   //         val wishesTableExistenceQuery = "SELECT DISTINCT tbl_name FROM sqlite_master WHERE tbl_name = '$TABLE_WISHES'"
+   //         val cursor: Cursor = db?.rawQuery(wishesTableExistenceQuery, null) ?: return
+  //          val tableExists = cursor.count > 0
+  //          cursor.close()
 
-            if (!tableExists) {
-                val CREATE_WISHES_TABLE = ("CREATE TABLE IF NOT EXISTS $TABLE_WISHES (" +
-                        "$KEY_WISH_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "$KEY_WISH_NAME TEXT," +
-                        "$KEY_WISH_LINK TEXT," +
-                        "$KEY_WISH_DESCRIPTION TEXT," +
-                        "$KEY_WISH_CATEGORY TEXT)")
+    //        if (!tableExists) {
+   //             val CREATE_WISHES_TABLE = ("CREATE TABLE IF NOT EXISTS $TABLE_WISHES (" +
+   //                     "$KEY_WISH_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+    //                    "$KEY_WISH_NAME TEXT," +
+    //                    "$KEY_WISH_LINK TEXT," +
+    //                    "$KEY_WISH_DESCRIPTION TEXT," +
+    //
+    //            db?.execSQL(CREATE_WISHES_TABLE)
+   //        }
+    //    }
+  //  }
 
-                db?.execSQL(CREATE_WISHES_TABLE)
-            }
-        }
+
+override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+       val CREATE_WISHES_TABLE = ("CREATE TABLE $TABLE_WISHES (" +
+              "$KEY_WISH_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+              "$KEY_WISH_NAME TEXT," +
+              "$KEY_WISH_DESCRIPTION TEXT," +
+              "$KEY_WISH_LINK TEXT," +
+               "$KEY_WISH_CATEGORY TEXT," +
+               "$KEY_WISH_USERNAME_FK TEXT," +
+               "FOREIGN KEY($KEY_WISH_USERNAME_FK) REFERENCES $TABLE_USERS($KEY_USERNAME))")
+
+       db?.execSQL(CREATE_WISHES_TABLE) }
+
+    fun setLoggedInUser(username: String) {
+        val sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString(KEY_LOGGED_IN_USER, username)
+        editor.apply()
     }
 
-
-//  override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-//        val CREATE_WISHES_TABLE = ("CREATE TABLE $TABLE_WISHES (" +
-//                "$KEY_WISH_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-//                "$KEY_WISH_NAME TEXT," +
-//                "$KEY_WISH_DESCRIPTION TEXT," +
-//                "$KEY_WISH_LINK TEXT," +
-//                "$KEY_WISH_CATEGORY TEXT)")
-//
-//        db?.execSQL(CREATE_WISHES_TABLE)
-//    }
-
-
+    fun getLoggedInUser(): String? {
+        val sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        return sharedPreferences.getString(KEY_LOGGED_IN_USER, null)
+    }
     fun createWish(
         wishname: String,
         wishlink: String,
@@ -102,6 +119,14 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
             put(KEY_WISH_DESCRIPTION, wishdesc) // Assign wishdesc to description
             put(KEY_WISH_LINK, wishlink) // Assign wishlink to link
             put(KEY_WISH_CATEGORY, category)
+
+            val loggedInUser = getLoggedInUser()
+
+            if (loggedInUser != null) {
+                put(KEY_WISH_USERNAME_FK, loggedInUser)
+            } else {
+                throw IllegalStateException("No user logged in.")
+            }
         }
 
         val successwish = db.insert(TABLE_WISHES, null, values)
@@ -185,7 +210,8 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
     fun getWishesByCategory(category: String): List<Wishes> {
         val wishList = mutableListOf<Wishes>()
         val db = this.readableDatabase
-        val query = "SELECT * FROM $TABLE_WISHES WHERE $KEY_WISH_CATEGORY = ?"
+        val loggedInUser = getLoggedInUser()
+        val query = "SELECT * FROM $TABLE_WISHES WHERE $KEY_WISH_CATEGORY = ? AND $KEY_WISH_USERNAME_FK = '$loggedInUser'"
         val selectionArgs = arrayOf(category)
         val cursor = db.rawQuery(query, selectionArgs)
 
@@ -228,7 +254,8 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper (context, DATABASE_N
     }
     fun getWishByID(wishId: Int): Wishes{
         val db = this.readableDatabase
-        val query = "SELECT * FROM $TABLE_WISHES WHERE $KEY_WISH_ID = $wishId"
+        val loggedInUser = getLoggedInUser()
+        val query = "SELECT * FROM $TABLE_WISHES WHERE $KEY_WISH_ID = $wishId AND $KEY_WISH_USERNAME_FK = '$loggedInUser'"
         val cursor = db.rawQuery(query, null)
         cursor.moveToFirst()
 

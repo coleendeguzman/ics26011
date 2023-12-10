@@ -35,6 +35,7 @@ class LoginPage : AppCompatActivity() {
 
                     if (user != null) {
                         // Store username in shared preferences
+                        dbHandler.setLoggedInUser(user.username)
                         val sharedPref = getSharedPreferences("USER_PREFERENCES", Context.MODE_PRIVATE)
                         val editor = sharedPref.edit()
                         editor.putString("USERNAME", username)
