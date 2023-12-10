@@ -48,7 +48,8 @@ class RegisterPage : AppCompatActivity() {
 
         btnTogglePassword2.setOnClickListener {
             if (etConfirmPassword.transformationMethod == PasswordTransformationMethod.getInstance()) {
-                etConfirmPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                etConfirmPassword.transformationMethod =
+                    HideReturnsTransformationMethod.getInstance()
                 btnTogglePassword2.setImageResource(R.drawable.show)
             } else {
                 etConfirmPassword.transformationMethod = PasswordTransformationMethod.getInstance()
@@ -77,7 +78,8 @@ class RegisterPage : AppCompatActivity() {
         btnRegister.setOnClickListener {
 
             fun isValidPassword(password: String): Boolean {
-                val passwordRegex = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{8,}$")
+                val passwordRegex =
+                    Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{8,}$")
                 return passwordRegex.matches(password)
             }
 
@@ -87,48 +89,58 @@ class RegisterPage : AppCompatActivity() {
 
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()
+            val confirmPassword = etConfirmPassword.text.toString()
 
-            if (username.trim().isNotEmpty() && password.trim().isNotEmpty()) {
 
-                if (isValidPassword(password)) {
+            if (username.trim().isNotEmpty() && password.trim().isNotEmpty() && confirmPassword.trim().isNotEmpty()) {
 
-                    if (etPassword.text.toString() == etConfirmPassword.text.toString()) {
+                val userExists = dbHandler.checkIfUserExists(username)
 
-                        val registrationSuccess = dbHandler.registerUser(username, password)
+                if (userExists) {
+                    Toast.makeText(
+                        this,
+                        "Username already exists. Please choose a different username.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
 
-                        if (registrationSuccess != -1L) {
-                            Toast.makeText(this, "Registration successful!", Toast.LENGTH_LONG)
-                                .show()
-                            val i = Intent(this, LoginPage::class.java)
-                            i.putExtra("USERNAME", username)
-                            startActivity(i)
+                    if (isValidPassword(password)) {
+                        if (etPassword.text.toString() == etConfirmPassword.text.toString()) {
+                            val registrationSuccess = dbHandler.registerUser(username, password)
 
-                            etUsername.text.clear()
-                            etPassword.text.clear()
-                        }
-                    } else {
+                            if (registrationSuccess != -1L) {
+                                Toast.makeText(this, "Registration successful!", Toast.LENGTH_LONG)
+                                    .show()
+                                val i = Intent(this, LoginPage::class.java)
+                                i.putExtra("USERNAME", username)
+                                startActivity(i)
+
+                                etUsername.text.clear()
+                                etPassword.text.clear()
+                            } else {
+                                Toast.makeText(
+                                    this,
+                                    "Registration failed. Please try again.",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+                        } else {
                             Toast.makeText(
                                 this,
-                                "Passwords do not match. Please Try again.",
+                                "Passwords do not match. Please try again.",
                                 Toast.LENGTH_LONG
                             ).show()
                         }
                     } else {
-
                         Toast.makeText(
                             this,
-                            "Registration Failed. Please try again.",
+                            "Password needs 8 characters, at least 1 symbol, and a mix of upper and lower case letters.",
                             Toast.LENGTH_LONG
                         ).show()
                     }
+                } else {
+                    Toast.makeText(this, "Fields cannot be left blank.", Toast.LENGTH_LONG).show()
                 }
-
-
-                else {
-
-                    Toast.makeText(this, "Password needs 8 characters at least 1 symbol and a mix of upper and lower case letters .", Toast.LENGTH_LONG).show()
-                }
-
             }
         }
     }

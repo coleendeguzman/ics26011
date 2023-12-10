@@ -24,7 +24,7 @@ class DatabaseHandler (private val context: Context) : SQLiteOpenHelper (context
 
     companion object {
         private const val DATABASE_VERSION = 10
-        private const val DATABASE_NAME = "UserDatabase.db"
+        private const val DATABASE_NAME = "Wishdex.db"
 
         private const val TABLE_USERS = "users"
         private const val KEY_USERNAME = "username"
@@ -36,7 +36,7 @@ class DatabaseHandler (private val context: Context) : SQLiteOpenHelper (context
         private const val KEY_WISH_LINK = "link"
         private const val KEY_WISH_DESCRIPTION = "description"
         private const val KEY_WISH_CATEGORY = "category"
-        private const val KEY_WISH_USERNAME_FK = "user"
+        private const val KEY_WISH_USERNAME_FK = "user_fk"
 
         private const val PREFS_NAME = "MyPrefs"
         private const val KEY_LOGGED_IN_USER = "loggedInUser"
@@ -64,16 +64,9 @@ class DatabaseHandler (private val context: Context) : SQLiteOpenHelper (context
     }
 
 override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-       val CREATE_WISHES_TABLE = ("CREATE TABLE $TABLE_WISHES (" +
-              "$KEY_WISH_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-              "$KEY_WISH_NAME TEXT," +
-              "$KEY_WISH_DESCRIPTION TEXT," +
-              "$KEY_WISH_LINK TEXT," +
-               "$KEY_WISH_CATEGORY TEXT," +
-               "$KEY_WISH_USERNAME_FK TEXT," +
-               "FOREIGN KEY($KEY_WISH_USERNAME_FK) REFERENCES $TABLE_USERS($KEY_USERNAME))")
-
-       db?.execSQL(CREATE_WISHES_TABLE) }
+    db!!.execSQL("DROP TABLE IF EXISTS $TABLE_USERS")
+    db.execSQL("DROP TABLE IF EXISTS $TABLE_WISHES")
+    onCreate(db) }
 
     fun setLoggedInUser(username: String) {
         val sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -248,6 +241,24 @@ override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db.close()
         return Wishes(id, name, link, desc, cat)
     }
+
+    fun checkIfUserExists(username: String): Boolean {
+        val db = this.readableDatabase
+        var userExists = false
+
+        val query = "SELECT * FROM $TABLE_USERS WHERE username = ?"
+        val cursor = db.rawQuery(query, arrayOf(username))
+
+        if (cursor != null) {
+            if (cursor.count > 0) {
+                userExists = true
+            }
+            cursor.close()
+        }
+        db.close()
+        return userExists
+    }
+
 }
 
 
